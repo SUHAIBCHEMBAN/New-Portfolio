@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
-import homeste from "../../Assests/Projects/Homesteadprojects.png";
+// import homeste from "../../Assests/Projects/Homesteadprojects.png";
 import bridal from "../../Assests/Projects/organza.png";
 import ssaoco from "../../Assets/Projects/ssaoco.png"
 import mcare from "../../Assets/Projects/M-CARE.png";
@@ -29,16 +29,16 @@ function Projects() {
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
 
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={homeste}
-              isBlog={false}
-              title="Homestead Projects "
-              description="HomesteadProjects: A dynamic, responsive website for an apartment business, providing users with an interactive platform to explore apartment listings. Hosted on AWS, the website ensures seamless access across devices and fast loading times."
-              ghLink="https://github.com/SUHAIBCHEMBAN/"
-              demoLink="https://www./homesteadprojects.com"
-            />
-          </Col>
+          // <Col md={4} className="project-card">
+          //   <ProjectCard
+          //     imgPath={homeste}
+          //     isBlog={false}
+          //     title="Homestead Projects "
+          //     description="HomesteadProjects: A dynamic, responsive website for an apartment business, providing users with an interactive platform to explore apartment listings. Hosted on AWS, the website ensures seamless access across devices and fast loading times."
+          //     ghLink="https://github.com/SUHAIBCHEMBAN/"
+          //     demoLink="https://www./homesteadprojects.com"
+          //   />
+          // </Col>
 
          <Col md={4} className="project-card">
             <ProjectCard
