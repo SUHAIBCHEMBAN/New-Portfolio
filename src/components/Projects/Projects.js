@@ -2,8 +2,8 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
-import homestead from "../../Assests/Projects/homesteadprojects.png";
-import bridal from "../../Assests/Projects/organzabridal.png";
+import homestead from "../../Assets/Projects/homesteadprojects.png";
+import bridal from "../../Assets/Projects/organzabridal.png";
 import ssaoco from "../../Assets/Projects/ssaoco.png"
 import mcare from "../../Assets/Projects/M-CARE.png";
 import evc from "../../Assets/Projects/Event Calendar.png";
