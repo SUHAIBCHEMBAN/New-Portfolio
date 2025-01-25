@@ -29,6 +29,30 @@ function Projects() {
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
 
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={homestead}
+              isBlog={false}
+              title="Homestead Projects "
+              description="HomesteadProjects is a dynamic, user-friendly, and responsive website designed to cater to the needs of an apartment business. The platform offers an engaging and interactive experience for users, allowing them to seamlessly explore and browse through detailed apartment listings. With a focus on functionality and aesthetics, the website ensures compatibility across all devices, delivering an optimal browsing experience. Hosted on AWS, it leverages robust cloud infrastructure to guarantee fast loading times, high availability, and reliable performance. HomesteadProjects redefines convenience by providing a streamlined solution for discovering and connecting with potential apartments effortlessly.
+
+ "
+              ghLink="https://github.com/SUHAIBCHEMBAN/"
+              demoLink="https://www./homesteadprojects.com"
+            />
+          </Col>
+
+         <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={bridal}
+              isBlog={false}
+              title="Organza Bridal"
+              description="Organza Bridal Hues is a beautifully designed static, responsive website crafted to elevate the online presence of a bridal business. With its elegant and sophisticated design, the website provides an immersive experience for users, allowing them to explore a curated collection of bridal products and services effortlessly. Built with attention to detail, the site highlights the business's offerings in a visually appealing and user-friendly manner. Hosted on AWS, it ensures optimal performance, seamless accessibility, and reliability, delivering a smooth browsing experience across all devices. Organza Bridal Hues is a perfect blend of style and functionality, catering to modern bridal needs."
+              ghLink="https://github.com/SUHAIBCHEMBAN/"
+              demoLink="https://www.organzabridal.in/"
+            />
+          </Col>    
+
         <Col md={4} className="project-card">
             <ProjectCard
               imgPath={homestead}
