@@ -36,7 +36,7 @@ function Projects() {
               title="Homestead Projects "
               description="HomesteadProjects is a dynamic, user-friendly, and responsive website designed to cater to the needs of an apartment business. The platform offers an engaging and interactive experience for users, allowing them to seamlessly explore and browse through detailed apartment listings. With a focus on functionality and aesthetics, the website ensures compatibility across all devices, delivering an optimal browsing experience. Hosted on AWS, it leverages robust cloud infrastructure to guarantee fast loading times, high availability, and reliable performance. HomesteadProjects redefines convenience by providing a streamlined solution for discovering and connecting with potential apartments effortlessly."
               ghLink="https://github.com/SUHAIBCHEMBAN/"
-              demoLink="https://www./homesteadprojects.com"
+              demoLink="https://www.homesteadprojects.com/"
             />
           </Col>
 
