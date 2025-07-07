@@ -2,19 +2,16 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
-import homestead from "../../Assets/Projects/homesteadprojects.png";
-import bridal from "../../Assets/Projects/organzabridal.png";
-import ssaoco from "../../Assets/Projects/ssaoco.png"
+import homestead from "../../Assets/Projects/Homesteadprojects.png";
+import hopuz from "../../Assets/Projects/hopuz.png";
+// import aquahealthy from "../../Assets/Projects/aquahealthy.png";
+import mazlo from "../../Assets/Projects/mazlo.png";
+import creativio from "../../Assets/Projects/creativio.png";
+import viowin from "../../Assets/Projects/viowin.png";
+import bridal from "../../Assets/Projects/organza.png";
+import ssaoco from "../../Assets/Projects/ssaocoh.png"
 import mcare from "../../Assets/Projects/M-CARE.png";
-import evc from "../../Assets/Projects/Event Calendar.png";
-import qrc from "../../Assets/Projects/QR Code.png";
-import bluestar from "../../Assets/Projects/Blue Star.png";
-import maggi from "../../Assets/Projects/Maggi.png";
-import cammery from "../../Assets/Projects/Cammery.png";
-import burger from "../../Assets/Projects/Burger King.png";
-import vivo from "../../Assets/Projects/Vivo.png";
-import herbal from "../../Assets/Projects/Herbal.png";
-import userauth from "../../Assets/Projects/user.jfif";
+import bluestar from "../../Assets/Projects/Bluestart.png";
 
 function Projects() {
   return (
@@ -39,6 +36,62 @@ function Projects() {
               demoLink="https://www.homesteadprojects.com/"
             />
           </Col>
+
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={hopuz} // replace with actual image import
+              isBlog={false}
+              title="Hopuz Printers & Packagers"
+              description="Hopuz Printers & Packagers is a dynamic WordPress-based website crafted for a professional printing and packaging company. Fully responsive and content-rich, it highlights the company’s services and products with a clean layout. The site ensures smooth navigation, optimized performance, and cross-device compatibility for a seamless user experience."
+              ghLink={null}
+              demoLink="https://www.hopuz.in" // Replace with your actual URL
+            />
+          </Col>
+
+          {/* <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={aquahealthy} // replace with actual image import
+              isBlog={false}
+              title="Aquahealthy Water Treatment"
+              description="Aquahealthy is a dynamic, user-focused platform designed for a certified water purifier and treatment company. It showcases services and products with full functionality for users to book services or order products online. Hosted on AWS, it offers responsive design, optimal performance, and easy interaction across all devices."
+              ghLink="https://github.com/SUHAIBCHEMBAN/aquahealthy" // Optional
+              demoLink="https://www.aquahealthy.in"
+            />
+        </Col> */}
+
+        <Col md={4} className="project-card">
+          <ProjectCard
+            imgPath={mazlo} // replace with actual image import
+            isBlog={false}
+            title="Mazlo Footwear"
+            description="Mazlo Footwear is a modern, responsive e-commerce-style website tailored for a footwear brand. Though still in its early phase without a payment gateway, it supports all other key e-commerce features like product display, filtering, and cart functionality. Built with scalability in mind, it’s ready for full online store integration."
+            ghLink="https://github.com/SUHAIBCHEMBAN/" // Optional
+            demoLink="https://www.mazlofootwear.com" // Replace with actual domain
+          />
+        </Col>
+
+        <Col md={4} className="project-card">
+          <ProjectCard
+            imgPath={creativio} // replace with actual image import
+            isBlog={false}
+            title="Creativio Media & Advertising"
+            description="Creativio is a sleek, dynamic website for a media and advertising agency, blending React-based UI with interactive animations and 3D visuals. Focused on showcasing services and portfolio, the site delivers a visually rich experience while maintaining responsiveness and fast loading across all devices."
+            ghLink="https://github.com/SUHAIBCHEMBAN/" // Optional
+            demoLink="https://www.creativio.in"
+          />
+        </Col>
+
+        <Col md={4} className="project-card">
+          <ProjectCard
+            imgPath={viowin} // replace with actual image import
+            isBlog={false}
+            title="Viowin Edu Cafe"
+            description="Viowin Edu Cafe is a clean, static informational website built for an educational institution. It provides concise details about online and distance learning programs with a focus on clarity and accessibility. Fully responsive and user-friendly, it ensures an efficient browsing experience for students on any device."
+            ghLink={null}
+            demoLink="https://www.viowin.org"
+          />
+        </Col>
+
 
          <Col md={4} className="project-card">
             <ProjectCard
@@ -78,39 +131,6 @@ function Projects() {
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={userauth}
-              isBlog={false}
-              title="USER AUTHENTICATION"
-              description="This project is a robust user authentication system developed using Python and Django. The system provides essential features such as user registration, login, logout, and password management, ensuring secure access and management of user accounts. The aim is to offer a secure and efficient authentication solution, demonstrating proficiency in Django's authentication framework and security practices."
-              ghLink="https://github.com/SUHAIBCHEMBAN/Python-django-project  "
-              demoLink="https://python-django-project.vercel.app/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={evc}
-              isBlog={false}
-              title="EVENT CALENDAR IN REACT"
-              description="This project is an interactive event calendar application developed using React. The application allows users to add and remove events dynamically without needing to reload the page, offering a seamless user experience. The goal is to provide a functional and user-friendly tool for managing events, showcasing advanced React skills and state management."
-              ghLink="https://github.com/SUHAIBCHEMBAN/MyCalendar-RJS"
-              demoLink="https://my-calendar-rjs.vercel.app/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={qrc}
-              isBlog={false}
-              title="QR CODE GENERATOR IN REACT" 
-              description="This project is an interactive QR code generator developed using React. The application allows users to create custom QR codes quickly and easily by entering text or URLs. The generated QR codes can be scanned with any standard QR code reader, making it a useful tool for sharing information in a convenient and modern way. The aim is to provide a user-friendly and efficient QR code generation solution, showcasing proficiency in React."
-              ghLink="https://github.com/SUHAIBCHEMBAN/Qr-Code-In-React"
-              demoLink="https://qr-code-in-react.vercel.app/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
               imgPath={bluestar}
               isBlog={false}
               title="BLUE STAR CLONE WEB"
@@ -118,62 +138,6 @@ function Projects() {
                   Welcome to the Blue Start Clone, This project is a responsive front-end web clone of the Blue Star website, built using HTML, CSS, media queries, and Bootstrap. The clone replicates the design and functionality of the original Blue Star site, featuring core components such as the homepage, product sections, promotional banners, and an intuitive navigation system. The aim is to create a similar user experience to the original, demonstrating advanced web development and design skills."
               ghLink="https://github.com/SUHAIBCHEMBAN/Blue-Star"
               demoLink="https://suhaibchemban.github.io/Blue-Star/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={maggi}
-              isBlog={false}
-              title="MAGGI CLONE WEBSITE"
-              description="
-                Welcome to the Maggi Clone, This project is a responsive front-end web clone of the Maggi website, developed using HTML, CSS, and media queries. The clone captures the design and functionality of the original Maggi site, including key elements such as the homepage, product sections, promotional banners, and a seamless navigation system. The goal is to provide a similar user experience to the original site while showcasing advanced web development skills."
-              ghLink="https://github.com/SUHAIBCHEMBAN/Maggi"
-              demoLink="https://suhaibchemban.github.io/Maggi/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={cammery}
-              isBlog={false}
-              title="CAMMERY CLONE WEB"
-              description="Welcome to the Cammery Ice Cream Clone, This project is a front-end web clone of the Camery Ice Cream website, crafted using HTML and CSS. The clone replicates the look and feel of the original Camery Ice Cream site, featuring key components such as the homepage, product listings, promotional banners, and an intuitive navigation system. The objective is to emulate the visual design and user interface, demonstrating skills in web development and design."
-              ghLink="https://github.com/SUHAIBCHEMBAN/Cammery"
-              demoLink="https://suhaibchemban.github.io/Cammery/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={burger}
-              isBlog={false}
-              title="BURGER KING CLONE WEB"
-              description="Welcome to the Burger King Clone,This project is a front-end web clone of the Burger King website, designed using HTML and CSS. The clone replicates the visual design and layout of the official Burger King site, featuring elements such as the homepage, menu sections, promotional banners, and navigation. The aim is to provide a similar user experience to the original, showcasing proficiency in web development and design principles."
-              ghLink="https://github.com/SUHAIBCHEMBAN/Burgurking"
-              demoLink="https://suhaibchemban.github.io/Burgurking/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={vivo}
-              isBlog={false}
-              title="VIVO CLONE WEB"
-              description="Welcome to the VIVO Clone,This project is a front-end web clone of the Vivo website, created using HTML and CSS. The clone captures the design and functionality of the original Vivo site, including essential elements such as the homepage, product sections, promotional banners, and a smooth navigation system. The goal is to provide a user experience similar to the original site, showcasing proficiency in web development and design."
-              ghLink="https://github.com/SUHAIBCHEMBAN/vivo"
-              demoLink="https://suhaibchemban.github.io/vivo/"
-            />
-          </Col>
-
-          <Col md={4} className="project-card">
-            <ProjectCard
-              imgPath={herbal}
-              isBlog={false}
-              title="HERBAL CLONE WEB"
-              description="Welcome to the Herbal Clone,This project is a front-end web clone of the Herbal website, developed using HTML and CSS. The clone replicates the design and functionality of the original Herbal site, featuring key elements such as the homepage, product sections, promotional banners, and an intuitive navigation system. The objective is to provide a similar user experience to the original site, showcasing your skills in web development and design."
-              ghLink="https://github.com/SUHAIBCHEMBAN/Herbal"
-              demoLink="https://suhaibchemban.github.io/Herbal/"
             />
           </Col>
 
