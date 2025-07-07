@@ -8,19 +8,34 @@ function AboutCard() {
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p style={{ textAlign: "justify" }}>
-          Hi, I’m Suhaib, a passionate and driven Python Developer with over a year of experience in web development. My journey into the world of coding began with foundational languages like C and Java, which later led me to explore web design. I eventually discovered Python and immersed myself in its ecosystem, mastering frameworks like Django to build robust and dynamic applications.
+  Hi, I’m Suhaib — a passionate and driven Python Developer with over a year of experience in building full-stack web applications.  
+  <br /><br />
+  My coding journey began with foundational languages like <b className="purple">C and Java</b>, which helped shape my logical thinking and problem-solving skills. Eventually, I discovered my passion for web development, diving deep into <b className="purple">Python</b> and mastering the <b className="purple">Django framework</b> to create robust, scalable applications.
+  <br /><br />
+  Over time, I’ve expanded my tech stack to include <b className="purple">JavaScript, React.js, PostgreSQL, REST APIs</b>, and cloud tools like <b className="purple">AWS EC2</b>, allowing me to deliver end-to-end solutions across various industries.
+  <br /><br />
+  I’ve worked on several real-world projects including:
+  <br />
+  <ul>
+    <li><b className="purple">Homestead Projects</b> – an apartment listing web app.</li>
+    <li><b className="purple">Aquahealthy</b> – a water treatment service and product booking platform.</li>
+    <li><b className="purple">Mazlo Footwear</b> – an e-commerce footwear showcase.</li>
+    <li><b className="purple">Creativio</b> – an animated React-based agency portfolio.</li>
+    <li><b className="purple">Hopuz Printers</b> – a corporate WordPress website.</li>
+    <li><b className="purple">Viowin Edu Cafe</b> – a static education website.</li>
+    <li><b className="purple">SSAOCO</b> – a freelance information web project.</li>
+  </ul>
+  <br />
+  Currently, I’m working as a <a href="#" className="purple">Web Developer</a> at an advertising company, where I combine design and backend logic to build creative, impactful solutions.
+  <br /><br />
+  <b>Beyond coding</b>, I enjoy:
+  <br />
+  <ImPointRight /> Playing games to unwind and stay inspired.<br />
+  <ImPointRight /> Traveling to explore cultures and perspectives.<br /><br />
+  I’m driven by the goal of using technology to solve real-world problems and create meaningful digital experiences.
+</p>
 
-Over the years, I’ve expanded my skill set by learning SQL, data structures, JavaScript, and React JS, allowing me to excel as a full-stack developer. I’ve applied my skills to real-world projects, including a major hospital management system, designed to improve user experience and operational efficiency. Additionally, I gained valuable freelance experience working on an information web project for <a href="www.ssaoco.com">SSAOCO </a>, further honing my ability to deliver tailored solutions.
-<br />  <br />
-Currently, I’m working as a <a href="#"> Web Developer </a> at an advertising company, where I combine creativity and technical expertise to deliver impactful digital experiences.
 
-Beyond the Code
-When I’m not immersed in coding, you can find me:
-<br /> <br />
-<ImPointRight /> Playing games to relax and inspire creativity.<br /> <br />
-<ImPointRight /> Traveling to explore new cultures and gain fresh perspectives.<br /> <br />
-I’m passionate about leveraging technology to solve real-world problems and strive to create solutions that truly make a difference.
-          </p>
         </blockquote>
       </Card.Body>
     </Card>
