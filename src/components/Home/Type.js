@@ -6,8 +6,9 @@ function Type() {
     <Typewriter
       options={{
         strings: [
-          "Python django + rest Developer",
-          "Backend Developer",
+          "Python Django + REST Developer",
+          "Full-Stack Developer (React + Django)",
+          "AWS Cloud + EC2 Enthusiast",
         ],
         autoStart: true,
         loop: true,
@@ -18,3 +19,4 @@ function Type() {
 }
 
 export default Type;
+
