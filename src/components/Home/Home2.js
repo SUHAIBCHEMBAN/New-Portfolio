@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import myImg from "../../Assets/my.jpeg";
+import myImg from "../../Assets/me.png";
 import Tilt from "react-parallax-tilt";
 import {
   AiFillGithub,
@@ -9,36 +9,27 @@ import {
 } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 
-function Home2() {
-  return (
-    <Container fluid className="home-about-section" id="about">
-      <Container>
-        <Row>
-        <Col md={8} className="home-about-description">
-  <h1 style={{ fontSize: "2.6em" }}>
-    LET ME <span className="purple">INTRODUCE</span> MYSELF
-  </h1>
-  <p className="home-about-body">
-    I’m a passionate developer who loves turning ideas into functional and engaging web applications.  
-    <br />
-    <br />I specialize in 
-    <i>
-      <b className="purple"> Python, Django,</b>
-    </i> and 
-    <i>
-      <b className="purple"> Modern JavaScript.</b>
-    </i>
-    <br />
-    <br />
-    My interests lie in crafting impactful 
-    <i>
-      <b className="purple"> web applications and digital products.</b>
-    </i>
-    <br />
-    <br />
-    I enjoy building innovative solutions and strive to create experiences that make a difference.
-  </p>
-</Col>
+  function Home2() {
+            return (
+              <Container fluid className="home-about-section" id="about">
+                <Container>
+                  <Row>
+                  <Col md={8} className="home-about-description">
+            <h1 style={{ fontSize: "2.6em" }}>
+              LET ME <span className="purple">INTRODUCE</span> MYSELF
+            </h1>
+            <p className="home-about-body">
+            I’m a passionate full-stack web developer with a strong background in 
+            <b className="purple"> Python (Django), REST APIs</b>, and 
+            <b className="purple"> modern JavaScript frameworks</b> like React.js.
+            <br /><br />
+            I specialize in building high-performance, scalable web applications and love 
+            crafting clean, functional user experiences.
+            <br /><br />
+            Currently, I’m focused on delivering impactful solutions for 
+            <b className="purple"> startups, businesses, and personal brands</b>.
+          </p>
+          </Col>
 
           <Col md={4} className="myAvtar">
             <Tilt>
@@ -101,6 +92,15 @@ function Home2() {
                 >
                   <AiFillInstagram />
                 </a>
+              </li>
+              <li>
+              <a
+                className="btn btn-primary mt-3"
+                href="/Suhaib_Resume.pdf" // Add your actual resume path
+                download
+              >
+                Download Resume
+              </a>
               </li>
             </ul>
           </Col>
