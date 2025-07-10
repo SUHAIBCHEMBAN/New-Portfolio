@@ -4,7 +4,7 @@ import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
 import homestead from "../../Assets/Projects/Homesteadprojects.png";
 import hopuz from "../../Assets/Projects/hopuz.png";
-// import aquahealthy from "../../Assets/Projects/aquahealthy.png";
+import aquahealthy from "../../Assets/Projects/aquahealthy.png";
 import mazlo from "../../Assets/Projects/mazlo.png";
 import creativio from "../../Assets/Projects/creativio.png";
 import viowin from "../../Assets/Projects/viowin.png";
@@ -48,7 +48,7 @@ function Projects() {
             />
           </Col>
 
-          {/* <Col md={4} className="project-card">
+          <Col md={4} className="project-card">
             <ProjectCard
               imgPath={aquahealthy} // replace with actual image import
               isBlog={false}
@@ -57,7 +57,7 @@ function Projects() {
               ghLink="https://github.com/SUHAIBCHEMBAN/aquahealthy" // Optional
               demoLink="https://www.aquahealthy.in"
             />
-        </Col> */}
+        </Col>
 
         <Col md={4} className="project-card">
           <ProjectCard
