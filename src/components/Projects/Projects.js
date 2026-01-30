@@ -12,6 +12,8 @@ import bridal from "../../Assets/Projects/organza.png";
 import ssaoco from "../../Assets/Projects/ssaocoh.png"
 import mcare from "../../Assets/Projects/M-CARE.png";
 import bluestar from "../../Assets/Projects/Bluestart.png";
+import emiacart from "../../Assets/Projects/emiacart.png";
+import airmixs from "../../Assets/Projects/airmixs.png";
 
 function Projects() {
   return (
@@ -25,6 +27,28 @@ function Projects() {
           Here are a few projects I've worked on recently.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
+
+        <Col md={4} className="project-card">
+          <ProjectCard
+            imgPath={emiacart} // Add this import at the top: import emiacart from "../../Assets/Projects/emiacart.png";
+            isBlog={false}
+            title="Emiacart E-Commerce"
+            description="Emiacart E-Commerce is a comprehensive industrial e-commerce platform serving as a premier supplier of industrial control systems, instrumentation devices, and machinery components across India. Headquartered in Jeddah, Saudi Arabia, the platform caters to manufacturing, construction, and heavy industrial sectors. Built with a modern theme-based architecture, it features advanced product cataloging, supply chain integration, and seamless ordering capabilities. The website delivers a professional, responsive experience optimized for industrial B2B transactions and global logistics coordination."
+            ghLink="https://github.com/SUHAIBCHEMBAN/" // Optional
+            demoLink="https://www.emiacart.com"
+          />
+        </Col>
+        
+        <Col md={4} className="project-card">
+          <ProjectCard
+            imgPath={airmixs} // Add this import at the top: import airmixs from "../../Assets/Projects/airmixs.png";
+            isBlog={false}
+            title="Airmixs Pneumatics"
+            description="Airmixs Pneumatics is a professional Odoo-based website developed for a Taiwan-headquartered manufacturer specializing in high-performance pneumatic and electric actuator automation components. Founded in 2010, the platform showcases their precision-engineered products including air units, control valves, actuators, vacuum units, and factory automation solutions. Integrating advanced German engineering standards, the website provides detailed product information and supports their global reach across diverse machinery sectors. Fully responsive and business-focused, it delivers optimal performance for B2B industrial clients."
+            ghLink={null}
+            demoLink="https://www.airmixs.com"
+          />
+        </Col>    
 
         <Col md={4} className="project-card">
             <ProjectCard
