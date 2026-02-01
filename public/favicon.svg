@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#grad)" />
+  
+  <!-- Profile Icon (Simple User Silhouette) -->
+  <circle cx="50" cy="38" r="14" fill="white" />
+  <path d="M50 56c-12 0-22 6-22 14v4h44v-4c0-8-10-14-22-14z" fill="white" />
+  
+  <!-- "scp" Text -->
+  <text x="50" y="88" text-anchor="middle" fill="white" font-family="'Inter', system-ui, sans-serif" font-weight="800" font-size="20">scp</text>
+</svg>
