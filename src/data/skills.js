@@ -6,7 +6,7 @@ import {
 import {
     SiTailwindcss, SiDjango, SiPostgresql, SiRedis, SiNotion,
     SiCodepen, SiPostman, SiPycharm, SiCanva,
-    SiVercel, SiGodaddy, SiCpanel, SiHostinger
+    SiVercel, SiGodaddy, SiCpanel, SiHostinger, SiFirebase
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
 
@@ -28,7 +28,8 @@ export const skills = [
             { name: "Python", level: 90, icon: FaPython },
             { name: "Django", level: 92, icon: SiDjango },
             { name: "DRF", level: 88, icon: SiDjango }, // Using Django icon for DRF
-            { name: "PostgreSQL", level: 85, icon: SiPostgresql }
+            { name: "PostgreSQL", level: 85, icon: SiPostgresql },
+            { name: "Firebase", level: 90, icon: SiFirebase }
         ]
     },
     {
@@ -59,7 +60,8 @@ export const skills = [
             { name: "WordPress", level: 85, icon: FaWordpress },
             { name: "Figma", level: 88, icon: FaFigma },
             { name: "GoDaddy", level: 80, icon: SiGodaddy },
-            { name: "cPanel", level: 85, icon: SiCpanel }
+            { name: "cPanel", level: 85, icon: SiCpanel },
+
         ]
     }
 ];

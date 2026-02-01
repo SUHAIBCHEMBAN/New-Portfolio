@@ -161,7 +161,7 @@ export default function About() {
         {/* Services */}
         <div className="services-container">
           <h3 className="section-title" style={{ fontSize: '2rem' }}>
-            Freelance Services
+            Our Services
           </h3>
           <p style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto var(--spacing-xl)' }}>
             I offer a range of professional services to help bring your digital projects to life.
