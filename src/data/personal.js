@@ -20,7 +20,7 @@ export const personalInfo = {
     github: "https://github.com/SUHAIBCHEMBAN",
     linkedin: "https://www.linkedin.com/in/suhaib-c-114b10292/",
   },
-  resumeUrl: "/assets/suhaibsresume.pdf"
+  resumeUrl: "/assets/Suhaibsresume.pdf"
 };
 
 export const experience = [
