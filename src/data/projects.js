@@ -113,7 +113,30 @@ export const projects = [
         liveUrl: "https://www.ssaoco.com",
         githubUrl: null,
         featured: false
+    },
+    {
+        id: 11,
+        title: "AJ SOLAR",
+        description: "A modern, responsive website for a solar energy company, showcasing their products and services with a clean and professional design.",
+        image: "/images/ajsolar.png",
+        technologies: ["Static", "Informational", "Responsive"],
+        category: "Static",
+        liveUrl: "https://www.ajsolar.org",
+        githubUrl: null,
+        featured: true
+    },
+    {
+        id: 12,
+        title: "KRYON ADS & MARKETING AGENCY",
+        description: "A modern, responsive website for a marketing agency, showcasing their services with a clean and professional design.",
+        image: "/images/kryon.png",
+        technologies: ["Static", "Marketing", "Informational"],
+        category: "Static",
+        liveUrl: "https://www.kryonads.com",
+        githubUrl: null,
+        featured: false
     }
+
 ];
 
 export const categories = ["All", "E-Commerce", "Dynamic", "Static"];
