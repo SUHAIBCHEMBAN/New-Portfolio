@@ -9,6 +9,7 @@ import {
     SiVercel, SiGodaddy, SiCpanel, SiHostinger, SiFirebase, SiBrevo
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
+import { SiFirebase } from 'react-icons/si';
 
 export const skills = [
     {
