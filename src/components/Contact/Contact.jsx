@@ -1,12 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { Canvas } from '@react-three/fiber';
 import { useForm } from 'react-hook-form';
-
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { personalInfo } from '../../data/personal';
-import Contact3D from './Contact3D';
+import AnimatedTitle from '../shared/AnimatedTitle';
 import './Contact.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,11 +20,8 @@ export default function Contact() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.to(infoRef.current, {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        ease: 'power3.out',
+      // Main reveal timeline
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 70%',
@@ -34,18 +29,46 @@ export default function Contact() {
         }
       });
 
-      gsap.to(formRef.current, {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        delay: 0.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 70%',
-          toggleActions: 'play none none reverse'
-        }
+      tl.fromTo('.contact-label', 
+        { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }
+      )
+      .fromTo('.contact-info h3', 
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.4'
+      )
+      .fromTo('.contact-info p', 
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.6'
+      )
+      .fromTo('.contact-item', 
+        { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out' },
+        '-=0.4'
+      )
+      .fromTo('.social-link', 
+        { opacity: 0, y: 20, scale: 0.8 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(2)' },
+        '-=0.3'
+      )
+      .fromTo(formRef.current, 
+        { opacity: 0, x: 60, clipPath: 'inset(0 0 0 100%)' },
+        { opacity: 1, x: 0, clipPath: 'inset(0 0 0 0%)', duration: 1.2, ease: 'power4.inOut' },
+        'start'
+      );
+
+      // Magnetic-like hover effect for icons and buttons
+      gsap.utils.toArray('.social-link, .form-submit').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          gsap.to(el, { scale: 1.05, duration: 0.3, ease: 'power2.out' });
+        });
+        el.addEventListener('mouseleave', () => {
+          gsap.to(el, { scale: 1, duration: 0.3, ease: 'power2.out' });
+        });
       });
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -91,47 +114,42 @@ export default function Contact() {
 
   return (
     <section ref={sectionRef} className="contact section" id="contact">
-      <div className="contact-3d-bg">
-        <Canvas camera={{ position: [0, 0, 5] }}>
-          <Contact3D />
-        </Canvas>
-      </div>
-
       <div className="container">
-        <h2 className="section-title">Get In Touch</h2>
-        <p style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto var(--spacing-2xl)' }}>
-          I'm currently available for freelance work and open to new opportunities. 
-          Let's discuss how I can help bring your project to life!
-        </p>
-
         <div className="contact-container">
           {/* Contact Info */}
-          <div ref={infoRef} className="contact-info">
-            <h3>Let's Talk</h3>
+          <div ref={infoRef} className="contact-info gpu-accel">
+            <span className="contact-label">Get In Touch</span>
+            <h3>Let's create something <span>extraordinary</span></h3>
             <p>
-              Whether you have a project in mind, need a consultation, or just want to say hello, 
-              I'd love to hear from you.
+              Whether you have a project in mind, need a consultation, or just want to discuss 
+              the latest in tech, I'm always open to interesting conversations.
             </p>
 
             <div className="contact-details">
               <div className="contact-item">
-                <FaEnvelope className="contact-icon" />
+                <div className="contact-icon-wrapper">
+                  <FaEnvelope />
+                </div>
                 <div className="contact-item-content">
-                  <h4>Email</h4>
+                  <h4>Email Me</h4>
                   <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
                 </div>
               </div>
 
               <div className="contact-item">
-                <FaPhone className="contact-icon" />
+                <div className="contact-icon-wrapper">
+                  <FaPhone />
+                </div>
                 <div className="contact-item-content">
-                  <h4>Phone</h4>
+                  <h4>Call Me</h4>
                   <p>{personalInfo.phone}</p>
                 </div>
               </div>
 
               <div className="contact-item">
-                <FaMapMarkerAlt className="contact-icon" />
+                <div className="contact-icon-wrapper">
+                  <FaMapMarkerAlt />
+                </div>
                 <div className="contact-item-content">
                   <h4>Location</h4>
                   <p>{personalInfo.location}</p>
@@ -140,34 +158,34 @@ export default function Contact() {
             </div>
 
             <div className="social-links">
-              <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" className="social-link">
+              <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
                 <FaGithub />
               </a>
-              <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" className="social-link">
+              <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" title="LinkedIn">
                 <FaLinkedin />
               </a>
-              <a href={personalInfo.social.twitter} target="_blank" rel="noopener noreferrer" className="social-link">
+              <a href={personalInfo.social.twitter} target="_blank" rel="noopener noreferrer" className="social-link" title="Twitter">
                 <FaTwitter />
               </a>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div ref={formRef} className="contact-form-wrapper">
+          <div ref={formRef} className="contact-form-wrapper gpu-accel">
             <form onSubmit={handleSubmit(onSubmit)} className="contact-form">
               <div className="form-group">
-                <label htmlFor="name">Name *</label>
+                <label htmlFor="name">Full Name</label>
                 <input
                   type="text"
                   id="name"
                   {...register('name', { required: 'Name is required' })}
-                  placeholder="Your Name"
+                  placeholder="John Doe"
                 />
                 {errors.name && <p className="form-error">{errors.name.message}</p>}
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email *</label>
+                <label htmlFor="email">Email Address</label>
                 <input
                   type="email"
                   id="email"
@@ -178,13 +196,13 @@ export default function Contact() {
                       message: 'Invalid email address'
                     }
                   })}
-                  placeholder="your.email@example.com"
+                  placeholder="john@example.com"
                 />
                 {errors.email && <p className="form-error">{errors.email.message}</p>}
               </div>
 
-              <div className="form-group">
-                <label htmlFor="subject">Subject *</label>
+              <div className="form-group full-width">
+                <label htmlFor="subject">Subject</label>
                 <input
                   type="text"
                   id="subject"
@@ -194,19 +212,21 @@ export default function Contact() {
                 {errors.subject && <p className="form-error">{errors.subject.message}</p>}
               </div>
 
-              <div className="form-group">
-                <label htmlFor="message">Message *</label>
+              <div className="form-group full-width">
+                <label htmlFor="message">Message</label>
                 <textarea
                   id="message"
                   {...register('message', { required: 'Message is required' })}
-                  placeholder="Tell me about your project..."
+                  placeholder="Tell me about your project or just say hi..."
                 />
                 {errors.message && <p className="form-error">{errors.message.message}</p>}
               </div>
 
-              <button type="submit" className="btn btn-primary form-submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </button>
+              <div className="form-group full-width">
+                <button type="submit" className="btn btn-primary form-submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </button>
+              </div>
 
               {formStatus.message && (
                 <div className={`form-message ${formStatus.type}`}>
