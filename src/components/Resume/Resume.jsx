@@ -11,7 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Resume() {
   const sectionRef = useRef();
   const timelineRef = useRef([]);
-  const achievementsRef = useRef([]);
+  const containerRef = useRef();
+  const expandRef = useRef();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -26,7 +27,7 @@ export default function Resume() {
         );
       });
 
-      // Animate timeline items with a sequence
+      // Animate timeline items
       timelineRef.current.forEach((item, index) => {
         if (!item) return;
         const dot = item.querySelector('.timeline-dot');
@@ -51,13 +52,44 @@ export default function Resume() {
         );
       });
 
-      // Simple achievement reveal
-      gsap.fromTo('.achievement-card', 
-        { opacity: 0, y: 30 },
-        { 
-          opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out',
-          scrollTrigger: { trigger: '.achievements-grid', start: 'top 80%' }
+      // PREMIUM EXPANDING ACHIEVEMENT SECTION (Antigravity Style)
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.achievements-expand-container',
+          start: "top 20%",
+          end: "bottom bottom",
+          scrub: 1,
+          pin: true,
+          pinSpacing: true
         }
+      });
+
+      tl.fromTo('.expanding-box', 
+        { 
+          scale: 0.5, 
+          borderRadius: "100px",
+          width: "60vw",
+          height: "40vh",
+          backgroundColor: "#111"
+        },
+        { 
+          scale: 1, 
+          borderRadius: "0px", 
+          width: "100vw", 
+          height: "100vh",
+          backgroundColor: "#000",
+          ease: "none"
+        }
+      )
+      .fromTo('.achievement-content-wrap',
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        "-=0.4"
+      )
+      .fromTo('.achievement-milestone',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, stagger: 0.1, duration: 0.5, ease: "power3.out" },
+        "-=0.2"
       );
 
     }, sectionRef);
@@ -144,22 +176,20 @@ export default function Resume() {
               ))}
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Achievements */}
-          <div className="achievements">
-            <h3>
-              <FaTrophy style={{ display: 'inline', marginRight: '0.8rem', color: 'var(--accent-primary)' }} />
-              Key Milestones
-            </h3>
-            <div className="achievements-grid">
+      {/* New Expanding Achievements Section */}
+      <div className="achievements-expand-container">
+        <div className="expanding-box">
+          <div className="achievement-content-wrap">
+            <h2 className="expanding-title">Key Milestones</h2>
+            <div className="milestones-grid">
               {achievements.map((achievement, index) => (
-                <div
-                  key={index}
-                  className="achievement-card"
-                >
-                   <span className="achievement-value gradient-text">{achievement.value}</span>
-                   <h4 className="achievement-label">{achievement.label}</h4>
-                   <p className="achievement-description">{achievement.description}</p>
+                <div key={index} className="achievement-milestone">
+                  <span className="milestone-value">{achievement.value}</span>
+                  <h4 className="milestone-label">{achievement.label}</h4>
+                  <p className="milestone-desc">{achievement.description}</p>
                 </div>
               ))}
             </div>

@@ -114,6 +114,42 @@ export default function AnimatedTitle({
             scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' },
           });
         }
+      } else if (resolvedMode === 'scatter') {
+        const chars = el.querySelectorAll('.char');
+        gsap.set(chars, { opacity: 0, y: 30 });
+        
+        // Initial entrance
+        gsap.to(chars, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.03,
+          duration: 1,
+          ease: 'power4.out',
+          delay
+        });
+
+        // Scroll scatter effect
+        chars.forEach((char, i) => {
+          // Asymmetric scatter for chaos
+          const xDir = (Math.random() - 0.5) * 800;
+          const yDir = (Math.random() - 0.3) * 600;
+          const rotate = (Math.random() - 0.5) * 360;
+
+          gsap.to(char, {
+            x: xDir,
+            y: yDir,
+            rotation: rotate,
+            opacity: 0,
+            scale: 0.5,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 5%',
+              end: 'bottom+=500 top',
+              scrub: 1,
+            }
+          });
+        });
       }
     }, el);
 

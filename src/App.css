@@ -1,6 +1,12 @@
+body {
+  background-color: #000;
+  margin: 0;
+}
+
 .App {
   min-height: 100vh;
   position: relative;
+  background-color: #000;
 }
 
 main {

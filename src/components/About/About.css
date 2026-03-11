@@ -1,7 +1,9 @@
 .about {
-    background: var(--bg-secondary);
+    background: #000;
     position: relative;
     overflow: hidden;
+    padding: var(--spacing-3xl) 0;
+    z-index: 1;
 }
 
 /* Background decoration */
@@ -143,21 +145,21 @@
 }
 
 .skill-category {
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: var(--spacing-xl);
     border-radius: var(--radius-xl);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     transition: all var(--transition-normal);
 }
 
 .skill-category:hover {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.06);
     transform: translateY(-10px);
-    box-shadow: var(--shadow-lg);
-    border-color: rgba(37, 99, 235, 0.1);
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .skill-category h3 {
@@ -188,20 +190,19 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    background: var(--bg-primary);
+    background: rgba(255, 255, 255, 0.02);
     padding: 0.6rem 1rem;
     border-radius: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all var(--transition-fast);
 }
 
 .skill-item:hover {
     background: var(--accent-gradient);
-    color: white;
+    color: #000000;
     transform: translateY(-5px) scale(1.05);
     border-color: transparent;
-    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
 }
 
 .skill-icon {
@@ -211,7 +212,7 @@
 }
 
 .skill-item:hover .skill-icon {
-    color: white;
+    color: #000000;
 }
 
 .skill-name {
@@ -233,22 +234,21 @@
 }
 
 .soft-skill-tag {
-    background: var(--bg-primary);
+    background: rgba(255, 255, 255, 0.03);
     padding: 0.8rem 1.5rem;
     border-radius: 50px;
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-secondary);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all var(--transition-normal);
 }
 
 .soft-skill-tag:hover {
     background: var(--accent-primary);
-    color: white;
+    color: #000000;
     transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
     border-color: transparent;
 }
 

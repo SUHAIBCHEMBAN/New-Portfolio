@@ -1,20 +1,25 @@
 .footer {
-    background: var(--bg-primary);
+    background: #000;
     padding: var(--spacing-3xl) 0 var(--spacing-xl);
     position: relative;
     overflow: hidden;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.footer::before {
-    content: '';
+.footer-bg-text {
     position: absolute;
-    top: 0;
+    bottom: -5%;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent);
+    font-size: clamp(5rem, 20vw, 25rem);
+    font-weight: 1000;
+    color: rgba(255, 255, 255, 0.02);
+    letter-spacing: -0.05em;
+    white-space: nowrap;
+    line-height: 0.8;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .footer-container {
@@ -52,15 +57,15 @@
 .social-icon-btn {
     width: 60px;
     height: 60px;
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
     border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.6rem;
     transition: all var(--transition-normal);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
 }
@@ -85,10 +90,11 @@
 }
 
 .social-icon-btn:hover {
-    color: white;
+    color: #000;
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
     border-color: transparent;
+    background: #fff;
 }
 
 .social-icon-btn:hover::before {
@@ -102,7 +108,7 @@
 .footer-bottom {
     width: 100%;
     padding-top: var(--spacing-xl);
-    border-top: 1px solid rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;

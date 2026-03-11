@@ -1,5 +1,5 @@
 .resume {
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
     position: relative;
     padding: var(--spacing-3xl) 0;
 }
@@ -18,6 +18,8 @@
     padding: 1.2rem 2.5rem;
     font-size: 1rem;
     border-radius: 50px;
+    background: #ffffff;
+    color: #000000;
 }
 
 /* Modern Timeline Styling */
@@ -27,7 +29,7 @@
 
 .timeline-section h3 {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-size: clamp(2.2rem, 6vw, 3rem);
     margin-bottom: var(--spacing-2xl);
     color: var(--text-primary);
     display: flex;
@@ -39,7 +41,7 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), transparent);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .timeline {
@@ -54,7 +56,7 @@
     top: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, var(--accent-primary), transparent);
+    background: linear-gradient(180deg, #ffffff, transparent);
 }
 
 .timeline-item {
@@ -64,37 +66,27 @@
 
 .timeline-dot {
     position: absolute;
-    left: -58px; /* -50px padding + half of dot size */
+    left: -58px;
     top: 0;
     width: 16px;
     height: 16px;
-    background: var(--bg-primary);
-    border: 3px solid var(--accent-primary);
+    background: #000;
+    border: 2px solid #fff;
     border-radius: 100%;
     z-index: 2;
-    box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
-    transition: all 0.3s ease;
-}
-
-.timeline-item:hover .timeline-dot {
-    background: var(--accent-primary);
-    transform: scale(1.4);
-    box-shadow: 0 0 25px rgba(37, 99, 235, 0.6);
 }
 
 .timeline-content {
-    background: var(--bg-primary);
+    background: #0a0a0a;
     padding: var(--spacing-xl);
-    border-radius: var(--radius-xl);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: var(--shadow-sm);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all var(--transition-normal);
 }
 
 .timeline-content:hover {
     transform: translateX(10px);
-    border-color: rgba(37, 99, 235, 0.1);
-    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .timeline-header {
@@ -109,17 +101,16 @@
 .timeline-company,
 .timeline-institution {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 800;
-    line-height: 1;
+    font-size: 1.6rem;
+    font-weight: 700;
     color: var(--text-primary);
 }
 
 .timeline-position,
 .timeline-degree {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--accent-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
     margin-bottom: 0.5rem;
 }
 
@@ -127,20 +118,12 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(37, 99, 235, 0.06);
-    color: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
     padding: 0.5rem 1rem;
     border-radius: 50px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
-}
-
-.experience-points,
-.timeline-description {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.6;
-    list-style: none;
 }
 
 .experience-points li {
@@ -148,14 +131,14 @@
     padding-left: 1.5rem;
     margin-bottom: 0.8rem;
     font-size: 0.95rem;
+    color: var(--text-secondary);
 }
 
 .experience-points li::before {
-    content: '→';
+    content: '—';
     position: absolute;
     left: 0;
-    color: var(--accent-primary);
-    font-weight: 800;
+    color: var(--text-tertiary);
 }
 
 .timeline-tech {
@@ -164,103 +147,168 @@
     gap: 0.8rem;
     margin-top: var(--spacing-xl);
     padding-top: var(--spacing-lg);
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .timeline-tech span {
-    background: var(--bg-secondary);
+    background: rgba(255, 255, 255, 0.03);
     color: var(--text-secondary);
     padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    font-size: 0.8rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
     font-weight: 600;
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Expanding Achievements Styling */
+.achievements-expand-container {
+    height: 180vh;
+    position: relative;
+    width: 100%;
+}
+
+.expanding-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.achievement-content-wrap {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    width: 100%;
+    max-width: 1200px;
+}
+
+.expanding-title {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: var(--spacing-3xl);
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+}
+
+.milestones-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: var(--spacing-3xl);
+    width: 100%;
+    padding: 0 var(--spacing-lg);
+}
+
+.achievement-milestone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 250px;
+    padding: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
     transition: all 0.3s ease;
 }
 
-.timeline-tech span:hover {
-    background: var(--accent-primary);
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
-}
-
-/* Achievements Section */
-.achievements {
-    margin-top: var(--spacing-3xl);
-    padding-top: var(--spacing-3xl);
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.achievements h3 {
-    text-align: center;
-    margin-bottom: var(--spacing-2xl);
-    font-size: clamp(2rem, 5vw, 2.5rem);
-}
-
-.achievements-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-xl);
-}
-
-.achievement-card {
-    background: var(--bg-primary);
-    padding: var(--spacing-2xl);
-    border-radius: var(--radius-xl);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    text-align: center;
-    transition: all var(--transition-normal);
-}
-
-.achievement-card:hover {
+.achievement-milestone:hover {
+    background: rgba(255, 255, 255, 0.05);
     transform: translateY(-10px);
-    box-shadow: var(--shadow-xl);
-    border-color: rgba(37, 99, 235, 0.1);
 }
 
-.achievement-value {
+.milestone-value {
     font-family: var(--font-heading);
-    font-size: 3.5rem;
+    font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 800;
-    margin-bottom: 0.5rem;
+    color: #fff;
     line-height: 1;
 }
 
-.achievement-label {
+.milestone-label {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 1rem 0;
 }
 
-.achievement-description {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.5;
+.milestone-desc {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    max-width: 250px;
+}
+
+@media (max-width: 1024px) {
+    .milestones-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
     .timeline {
         padding-left: 30px;
     }
-    
+
     .timeline-dot {
         left: -38px;
     }
-    
+
     .timeline-header {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .timeline-content {
         padding: var(--spacing-lg);
     }
-    
-    .resume-download .btn {
+
+    .achievements-expand-container {
+        height: auto;
+        padding-bottom: var(--spacing-3xl);
+    }
+
+    .expanding-box {
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        padding: var(--spacing-2xl) 0;
+        background: #000 !important;
+    }
+
+    .expanding-title {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .achievement-content-wrap {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .milestones-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-lg);
+        padding: 0 var(--spacing-sm);
+    }
+
+    .achievement-milestone {
         width: 100%;
-        padding: 1rem 1.5rem;
+        min-width: unset;
+        padding: var(--spacing-lg);
+    }
+
+    .milestone-value {
+        font-size: 3rem;
+    }
+
+    .milestone-desc {
+        max-width: unset;
     }
 }

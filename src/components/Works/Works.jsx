@@ -26,103 +26,105 @@ export default function Works() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Main Title Animation
-      gsap.from(".works-title-bg", {
-        opacity: 0,
-        x: -100,
-        duration: 1.5,
-        scrollTrigger: {
-          trigger: ".works-header",
-          start: "top 80%",
+      let mm = gsap.matchMedia();
+
+      mm.add("(min-width: 769px)", () => {
+        // Main Title Animation
+        gsap.from(".works-title-bg", {
+          opacity: 0,
+          x: -100,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: ".works-header",
+            start: "top 80%",
+          }
+        });
+
+        // Horizontal Scroll Setup
+        const pinWrapper = document.querySelector('.works-pin-wrapper');
+        const projectsDisplay = document.querySelector('.projects-display');
+        
+        if (cardsRef.current.length > 0 && pinWrapper && projectsDisplay) {
+          const getScrollAmount = () => {
+              const containerWidth = projectsDisplay.scrollWidth;
+              return -(containerWidth - window.innerWidth + (window.innerWidth * 0.15)); 
+          };
+
+          const horizontalTween = gsap.to(projectsDisplay, {
+              x: getScrollAmount,
+              ease: "none",
+              scrollTrigger: {
+                  trigger: pinWrapper,
+                  start: "top 10%",
+                  end: () => `+=${projectsDisplay.scrollWidth}`,
+                  pin: true,
+                  scrub: 1.5,
+                  invalidateOnRefresh: true,
+              }
+          });
+
+          cardsRef.current.forEach((card) => {
+              if (!card) return;
+              
+              const visual = card.querySelector('.card-visual');
+              const image = card.querySelector('.image-container img');
+              const content = card.querySelector('.card-content');
+
+              gsap.set(visual, { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' });
+              gsap.set(content, { y: 40, opacity: 0 });
+
+              const entryTl = gsap.timeline({
+                  scrollTrigger: {
+                      trigger: card,
+                      containerAnimation: horizontalTween,
+                      start: "left 85%",
+                      toggleActions: "play none none reverse"
+                  }
+              });
+
+              entryTl.to(visual, {
+                  clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                  duration: 1.2,
+                  ease: "expo.out"
+              })
+              .to(content, {
+                  y: 0,
+                  opacity: 1,
+                  duration: 1,
+                  ease: "power3.out"
+              }, "-=0.8");
+
+              gsap.to(image, {
+                  x: 40,
+                  ease: "none",
+                  scrollTrigger: {
+                      trigger: card,
+                      containerAnimation: horizontalTween,
+                      start: "left right",
+                      end: "right left",
+                      scrub: true
+                  }
+              });
+          });
         }
       });
 
-      gsap.from(".works-header .section-title", {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        delay: 0.3,
-        scrollTrigger: {
-          trigger: ".works-header",
-          start: "top 80%",
-        }
-      });
-
-      // Horizontal Scroll Setup
-      const pinWrapper = document.querySelector('.works-pin-wrapper');
-      const projectsDisplay = document.querySelector('.projects-display');
-      
-      if (cardsRef.current.length > 0 && pinWrapper && projectsDisplay) {
-        // Dynamic measure for scroll amount
-        const getScrollAmount = () => {
-            const containerWidth = projectsDisplay.scrollWidth;
-            return -(containerWidth - window.innerWidth + (window.innerWidth * 0.1)); 
-        };
-
-        const horizontalTween = gsap.to(projectsDisplay, {
-            x: getScrollAmount,
-            ease: "none",
+      // Mobile Animations
+      mm.add("(max-width: 768px)", () => {
+        gsap.utils.toArray('.modern-project-card').forEach((card) => {
+          gsap.from(card, {
+            opacity: 0,
+            y: 50,
+            duration: 1,
             scrollTrigger: {
-                trigger: pinWrapper,
-                start: "top 10%", // Pin near the top
-                end: () => `+=${projectsDisplay.scrollWidth}`, // Scroll amount
-                pin: true,
-                scrub: 1.5,
-                invalidateOnRefresh: true,
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
             }
+          });
         });
+      });
 
-        // Animations for each card
-        cardsRef.current.forEach((card) => {
-            if (!card) return;
-            
-            const visual = card.querySelector('.card-visual');
-            const image = card.querySelector('.image-container img');
-            const content = card.querySelector('.card-content');
-
-            // Setup
-            gsap.set(visual, { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' });
-            gsap.set(content, { y: 40, opacity: 0, filter: "blur(10px)" });
-            gsap.set(image, { scale: 1.3, x: -40 }); // Parallax starting left
-
-            // Entry Reveal when scrolling horizontally
-            const entryTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: card,
-                    containerAnimation: horizontalTween,
-                    start: "left 85%", // starts when card enters 85% of viewport from right
-                    toggleActions: "play none none reverse"
-                }
-            });
-
-            entryTl.to(visual, {
-                clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-                duration: 1.2,
-                ease: "expo.out"
-            })
-            .to(content, {
-                y: 0,
-                opacity: 1,
-                filter: "blur(0px)",
-                duration: 1,
-                ease: "power3.out"
-            }, "-=0.8");
-
-            // Horizontal Image Parallax (Scrubbed)
-            gsap.to(image, {
-                x: 40, // Move image right as you scroll horizontally
-                scale: 1,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: card,
-                    containerAnimation: horizontalTween,
-                    start: "left right",
-                    end: "right left",
-                    scrub: true
-                }
-            });
-        });
-      }
     }, sectionRef);
 
     return () => ctx.revert();

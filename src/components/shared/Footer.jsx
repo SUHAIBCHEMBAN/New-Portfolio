@@ -7,6 +7,7 @@ export default function Footer() {
 
   return (
     <footer className="footer">
+      <div className="footer-bg-text">SUHAIB CHEMBAN</div>
       <div className="container footer-container">
         <div className="footer-main">
           <div className="footer-branding">

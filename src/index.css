@@ -7,18 +7,18 @@
 }
 
 :root {
-  /* Color Palette - Premium Light Theme (Python Developer) */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary: #f1f5f9;
+  /* Color Palette - Premium Apple-style Dark Theme */
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #1a1a1a;
   
-  --accent-primary: #2563eb; /* Professional Blue */
-  --accent-secondary: #4f46e5; /* Indigo */
-  --accent-gradient: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  --accent-primary: #ffffff; /* Clean White */
+  --accent-secondary: #86868b; /* Apple Secondary Gray */
+  --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a1a1a6 100%);
   
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-tertiary: #64748b;
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-tertiary: #86868b;
   
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -29,20 +29,20 @@
   --spacing-2xl: 4rem;
   --spacing-3xl: 6rem;
   
-  /* Typography - Kinetic-ready fonts */
-  --font-body: 'Plus Jakarta Sans', sans-serif;
-  --font-heading: 'Syne', sans-serif;
+  /* Typography */
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
   
   /* Transitions */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.65, 0, 0.35, 1);
   
-  /* Shadows */
-  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-  --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
+  /* Shadows - Minimalist */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 15px rgba(255, 255, 255, 0.1);
   
   /* Border Radius */
   --radius-sm: 0.5rem;
@@ -152,6 +152,7 @@ p {
   border-radius: 4px;
   color: var(--accent-primary);
   font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Lists */
@@ -304,49 +305,49 @@ a:hover {
 }
 
 .btn-primary {
-  background: var(--accent-gradient);
-  color: #ffffff;
-  box-shadow: var(--shadow-glow);
+  background: var(--accent-primary);
+  color: #000000;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+  background: #f5f5f7;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
 }
 
 .btn-outline {
   background: transparent;
   color: var(--text-primary);
-  border: 1px solid var(--text-tertiary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-outline:hover {
-  background: var(--bg-secondary);
-  border-color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--text-primary);
 }
 
 /* Card Styles */
 .card {
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   transition: all var(--transition-normal);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: var(--shadow-sm);
 }
 
 .card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-md);
-  border-color: rgba(37, 99, 235, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Glassmorphism */
 .glass {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Scrollbar Styling */

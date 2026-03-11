@@ -11,7 +11,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Hero() {
   const heroRef = useRef();
   const contentRef = useRef();
-  const imageRef = useRef();
   const taglineRef = useRef();
   const [currentTaglineIndex, setCurrentTaglineIndex] = useState(0);
 
@@ -38,60 +37,59 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Create a master timeline for the initial reveal
+      // 1. Initial Load Reveal
       const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.5 } });
 
-      // Build out the high-end initial load sequence
-      tl.from(".hero-greeting", {
-        opacity: 0,
-        y: 20
-      })
-      .from(imageRef.current, {
-        opacity: 0,
-        scale: 1.1,
-        clipPath: 'circle(0% at 50% 50%)', // Stylish circular wipe
-        duration: 2
-      }, "-=1.2")
-      .from(taglineRef.current, {
-        opacity: 0,
-        y: 20
-      }, "-=1.5")
-      .from(".hero-description", {
-        opacity: 0,
-        y: 20
-      }, "-=1.4")
-      .from(".hero-cta .btn", {
-        opacity: 0,
-        y: 20,
-        stagger: 0.1
-      }, "-=1.4");
+      tl.from(".hero-greeting", { opacity: 0, y: 20 })
+      .from(taglineRef.current, { opacity: 0, y: 20 }, "-=1.2")
+      .from(".hero-description", { opacity: 0, y: 20 }, "-=1")
+      .from(".hero-cta .btn", { opacity: 0, y: 20, stagger: 0.1 }, "-=1");
 
-      // Awwwards-style Parallax Scrolling Effect
-      // 1. Hero Content Parallax (Moves up and fades)
-      gsap.to(contentRef.current, {
-        y: -150, // More aggressive parallax
-        filter: "blur(10px)",
-        opacity: 0,
-        ease: 'none',
+      // 2. ANTIGRAVITY STYLE EXPANDING REVEAL
+      const revealTl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.5 // Smooth scrubbing
+          start: "top top",
+          end: "+=200%", // Longer duration for smoother feel
+          scrub: 1.2,
+          pin: true,
+          pinSpacing: true,
+          invalidateOnRefresh: true
         }
       });
 
-      // 2. Hero Image Parallax (Moves up at a different rate, creating depth)
-      gsap.to(imageRef.current, {
-        y: -50,
-        scale: 0.9,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.5
-        }
+      // Perspective fade for content
+      revealTl.to(contentRef.current, {
+        opacity: 0,
+        y: -150,
+        scale: 0.8,
+        filter: "blur(20px)",
+        ease: "power2.in"
+      })
+      .fromTo(".hero-reveal-box", 
+        { 
+          scale: 0.1, 
+          borderRadius: "60px",
+          opacity: 0,
+          rotateX: 45 // 3D perspective tilt
+        },
+        { 
+          scale: 1, 
+          borderRadius: "0px", 
+          opacity: 1,
+          rotateX: 0,
+          ease: "none"
+        },
+        "-=0.6"
+      )
+      .to(".reveal-content-preview", {
+        opacity: 1,
+        scale: 1,
+        duration: 0.5
+      }, "-=0.4")
+      .to(".hero-reveal-box", {
+        backgroundColor: "rgba(0,0,0,1)",
+        duration: 0.3
       });
 
     }, heroRef);
@@ -105,15 +103,15 @@ export default function Hero() {
   };
 
   return (
-    <section ref={heroRef} className="hero" id="home">
-      <div className="hero-container">
+    <section ref={heroRef} className="hero no-image" id="home">
+      <div className="hero-container full-width">
         <div ref={contentRef} className="hero-content gpu-accel">
           <p className="hero-greeting">Hi, I'm</p>
           <AnimatedTitle 
             as="h1" 
             text={personalInfo.name} 
             className="hero-title"
-            mode="skew"
+            mode="scatter"
             gradient={true}
           />
           <p ref={taglineRef} className="hero-tagline gradient-text">{personalInfo.tagline[currentTaglineIndex]}</p>
@@ -127,9 +125,14 @@ export default function Hero() {
             </a>
           </div>
         </div>
+      </div>
 
-        <div ref={imageRef} className="hero-image-container gpu-accel">
-          <HeroImage />
+      <div className="hero-reveal-container">
+        <div className="hero-reveal-box">
+          <div className="reveal-content-preview">
+            <span className="reveal-label">Discover</span>
+            <h2 className="reveal-text">Who I Am</h2>
+          </div>
         </div>
       </div>
 

@@ -7,15 +7,35 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ScrollParticles({ count = 2000 }) {
+function ScrollParticles({ count = 1500 }) {
   const pointsRef = useRef();
   
+  // Generate a texture with coding symbols
+  const iconTexture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    
+    // Draw coding symbols
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 48px monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    const icons = ['{', '}', '<', '>', '/', '#', ';', '(', ')'];
+    const icon = icons[Math.floor(Math.random() * icons.length)];
+    ctx.fillText(icon, 32, 32);
+    
+    const tex = new THREE.CanvasTexture(canvas);
+    return tex;
+  }, []);
+
   // Generate random positions tightly packed into a sphere/cloud
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-       // Random position within a sphere roughly representing data points
-       const r = 10 * Math.cbrt(Math.random());
+       const r = 12 * Math.cbrt(Math.random());
        const theta = Math.random() * 2 * Math.PI;
        const phi = Math.acos(2 * Math.random() - 1);
        
@@ -27,42 +47,39 @@ function ScrollParticles({ count = 2000 }) {
   }, [count]);
 
   useEffect(() => {
-    // ScrollTrigger to animate the rotation of the particle sphere based on scroll
     if (pointsRef.current) {
         gsap.to(pointsRef.current.rotation, {
             y: Math.PI * 2,
-            x: Math.PI / 2,
+            x: Math.PI / 4,
             ease: "none",
             scrollTrigger: {
                 trigger: document.body,
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 1.5 // Smooth scrubbing tied to scroll
+                scrub: 2
             }
         });
     }
   }, []);
 
-  // Extremely subtle continuous ambient movement
   useFrame((state, delta) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.z += delta * 0.02;
+      pointsRef.current.rotation.z += delta * 0.01;
+      pointsRef.current.rotation.y += delta * 0.005;
     }
   });
 
   return (
     <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
-      {/* 
-        A very clean, professional look: extremely small, sharp dots.
-        Color matches the Python Blue accent defined in our CSS.
-      */}
       <PointMaterial
         transparent
-        color="#2563eb"
-        size={0.05}
+        alphaMap={iconTexture}
+        alphaTest={0.01}
+        color="#ffffff"
+        size={0.12}
         sizeAttenuation={true}
         depthWrite={false}
-        opacity={0.4}
+        opacity={0.3}
       />
     </Points>
   );
