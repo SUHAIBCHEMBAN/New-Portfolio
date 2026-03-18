@@ -6,7 +6,8 @@ import {
 import {
     SiTailwindcss, SiDjango, SiPostgresql, SiRedis, SiNotion,
     SiCodepen, SiPostman, SiPycharm, SiCanva,
-    SiVercel, SiGodaddy, SiCpanel, SiHostinger, SiFirebase, SiBrevo
+    SiVercel, SiGodaddy, SiCpanel, SiHostinger, SiFirebase, SiBrevo,
+    SiThreedotjs, SiGreensock
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
 
@@ -19,7 +20,9 @@ export const skills = [
             { name: "Bootstrap", level: 90, icon: FaBootstrap },
             { name: "Tailwind CSS", level: 92, icon: SiTailwindcss },
             { name: "React JS", level: 90, icon: FaReact },
-            { name: "JavaScript", level: 90, icon: FaJs }
+            { name: "JavaScript", level: 90, icon: FaJs },
+            { name: "Three.js", level: 85, icon: SiThreedotjs },
+            { name: "GSAP", level: 88, icon: SiGreensock }
         ]
     },
     {
