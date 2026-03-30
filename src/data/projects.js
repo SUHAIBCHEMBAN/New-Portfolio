@@ -135,6 +135,17 @@ export const projects = [
         liveUrl: "https://www.kryonads.com",
         githubUrl: null,
         featured: false
+    },
+    {
+        id: 13,
+        title: "SAMEER INFROMATICS",
+        description: "A modern, responsive website for a marketing agency, showcasing their services with a clean and professional design.",
+        image: "/images/sameer.png",
+        technologies: ["Static", "Marketing", "Informational"],
+        category: "Static",
+        liveUrl: "https://www.sami-me.com",
+        githubUrl: null,
+        featured: false
     }
 
 ];

@@ -40,73 +40,61 @@ export default function Works() {
           }
         });
 
-        // Horizontal Scroll Setup
-        const pinWrapper = document.querySelector('.works-pin-wrapper');
-        const projectsDisplay = document.querySelector('.projects-display');
+        // Sticky Reveal Animation
+        const cards = cardsRef.current.slice(0, filteredProjects.length).filter(c => c);
         
-        if (cardsRef.current.length > 0 && pinWrapper && projectsDisplay) {
-          const getScrollAmount = () => {
-              const containerWidth = projectsDisplay.scrollWidth;
-              return -(containerWidth - window.innerWidth + (window.innerWidth * 0.15)); 
-          };
+        cards.forEach((card, i) => {
+          const visual = card.querySelector('.card-visual');
+          const content = card.querySelector('.card-content');
+          const image = card.querySelector('.image-container img');
 
-          const horizontalTween = gsap.to(projectsDisplay, {
-              x: getScrollAmount,
-              ease: "none",
+          // Correct Layering
+          gsap.set(card, { zIndex: i + 1 });
+
+          // Entrance animation for content
+          const entranceTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: card,
+              start: "top 80%",
+              toggleActions: "play none none reverse"
+            }
+          });
+
+          entranceTl.fromTo(visual, 
+            { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' },
+            { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 1.2, ease: "expo.out" }
+          ).fromTo(content,
+            { opacity: 0, y: 40 },
+            { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
+            "-=0.7"
+          );
+
+          // Card Outgoing Animation (as it gets covered)
+          if (i < cards.length - 1) {
+            gsap.to(card, {
+              scale: 0.9,
+              opacity: 0.3,
+              filter: "blur(5px)",
               scrollTrigger: {
-                  trigger: pinWrapper,
-                  start: "top 10%",
-                  end: () => `+=${projectsDisplay.scrollWidth}`,
-                  pin: true,
-                  scrub: 1.5,
-                  invalidateOnRefresh: true,
+                trigger: cards[i + 1],
+                start: "top 100%",
+                end: "top 20%",
+                scrub: true
               }
+            });
+          }
+
+          // Image Parallax
+          gsap.to(image, {
+            translateY: "15%",
+            scrollTrigger: {
+              trigger: card,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true
+            }
           });
-
-          cardsRef.current.forEach((card) => {
-              if (!card) return;
-              
-              const visual = card.querySelector('.card-visual');
-              const image = card.querySelector('.image-container img');
-              const content = card.querySelector('.card-content');
-
-              gsap.set(visual, { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' });
-              gsap.set(content, { y: 40, opacity: 0 });
-
-              const entryTl = gsap.timeline({
-                  scrollTrigger: {
-                      trigger: card,
-                      containerAnimation: horizontalTween,
-                      start: "left 85%",
-                      toggleActions: "play none none reverse"
-                  }
-              });
-
-              entryTl.to(visual, {
-                  clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-                  duration: 1.2,
-                  ease: "expo.out"
-              })
-              .to(content, {
-                  y: 0,
-                  opacity: 1,
-                  duration: 1,
-                  ease: "power3.out"
-              }, "-=0.8");
-
-              gsap.to(image, {
-                  x: 40,
-                  ease: "none",
-                  scrollTrigger: {
-                      trigger: card,
-                      containerAnimation: horizontalTween,
-                      start: "left right",
-                      end: "right left",
-                      scrub: true
-                  }
-              });
-          });
-        }
+        });
       });
 
       // Mobile Animations
@@ -171,11 +159,10 @@ export default function Works() {
               <div
                 key={project.id}
                 ref={(el) => (cardsRef.current[index] = el)}
-                className={`modern-project-card gpu-accel ${project.featured ? 'is-featured' : ''} ${index % 2 !== 0 ? 'is-offset' : ''}`}
+                className={`modern-project-card gpu-accel ${project.featured ? 'is-featured' : ''}`}
               >
-                <div className="card-number">0{index + 1}</div>
-                
                 <div className="card-inner">
+                  <div className="card-number">0{index + 1}</div>
                   <div className="card-visual">
                     <div className="image-container">
                       <img src={project.image} alt={project.title} loading="lazy" />
