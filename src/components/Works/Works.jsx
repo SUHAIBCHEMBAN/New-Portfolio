@@ -10,57 +10,41 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Works() {
   const sectionRef = useRef();
-  const marqueeRef = useRef();
-  const containerRef = useRef();
 
   useEffect(() => {
+    // Robust, non-blocking entrance animations
     const ctx = gsap.context(() => {
-      // Marquee Scroll
-      gsap.to(marqueeRef.current, {
-        xPercent: -50,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.5,
-        }
-      });
-
-      // Project Card Reveals
       const cards = gsap.utils.toArray('.modern-project-card');
-      cards.forEach((card, i) => {
+      
+      cards.forEach((card) => {
         const visual = card.querySelector('.card-visual');
         const content = card.querySelector('.card-content');
         
-        gsap.fromTo(visual, 
-          { clipPath: 'inset(100% 0 0 0)', scale: 1.2 },
-          { 
-            clipPath: 'inset(0% 0 0 0)', 
-            scale: 1, 
-            duration: 1.5,
-            ease: 'expo.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 60%',
-            }
+        // Simple, clean reveals that ensure content is always visible
+        gsap.from(visual, {
+          opacity: 0,
+          y: 60,
+          scale: 0.95,
+          duration: 1.2,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none none"
           }
-        );
+        });
 
-        gsap.fromTo(content, 
-          { opacity: 0, y: 50 },
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: 1,
-            delay: 0.3,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 60%',
-            }
+        gsap.from(content, {
+          opacity: 0,
+          y: 40,
+          duration: 1,
+          delay: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
           }
-        );
+        });
       });
     }, sectionRef);
 
@@ -69,36 +53,41 @@ export default function Works() {
 
   return (
     <section ref={sectionRef} className="works-unique" id="works">
-      <div ref={marqueeRef} className="works-marquee">
-        Work • Projects • Design • Development • Code • 
+      {/* Background Marquee - Fixed & Low Prominence */}
+      <div className="works-marquee-wrapper">
+        <div className="works-marquee-static">Projects • Experience • Solutions • Works • </div>
       </div>
 
       <div className="container">
-        <AnimatedTitle text="Selected Works" mode="reveal" />
+        <header className="works-header" style={{ marginBottom: '5rem' }}>
+          <AnimatedTitle text="Selected Works" mode="reveal" />
+        </header>
         
-        <div ref={containerRef} className="projects-display">
-          {projects.map((project, index) => (
+        <div className="projects-display">
+          {projects.map((project) => (
             <div key={project.id} className="modern-project-card">
               <div className="card-inner">
+                {/* Visual Frame - Uniform Across All Cards */}
                 <div className="card-visual gpu-accel">
                   <div className="image-container">
-                    <img src={project.image} alt={project.title} />
+                    <img src={project.image} alt={project.title} loading="lazy" />
                   </div>
                 </div>
 
+                {/* Content Block */}
                 <div className="card-content">
                   <h3 className="project-headline">{project.title}</h3>
                   <p className="project-brief">{project.description}</p>
                   
                   <div className="project-tech-stack">
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                      {project.technologies.slice(0, 4).map((tech, i) => (
-                        <span key={i} className="tech-item">{tech}</span>
+                    <div className="tech-tags-wrapper">
+                      {project.technologies?.slice(0, 4).map((tech, i) => (
+                        <span key={i} className="tech-tag-item">{tech}</span>
                       ))}
                     </div>
                   </div>
 
-                  <div className="card-action">
+                  <div className="card-btn-wrap">
                     <Magnetic>
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary clickable">
                         Explore Project

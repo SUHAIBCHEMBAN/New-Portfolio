@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { personalInfo } from '../../data/personal';
-import Magnetic from '../shared/Magnetic';
 import './Hero.css';
 
 export default function Hero() {
@@ -9,56 +8,25 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      // Premium Entrance Animation Only (No scroll-triggered translation)
-      tl.from(".hero-greeting", { 
-        opacity: 0, 
-        y: 30,
-        duration: 0.8,
-        ease: "power3.out"
-      })
-      .from(".title-top", {
-        y: 100,
-        opacity: 0,
-        rotateX: -20,
-        duration: 1.2,
-        ease: "expo.out"
-      }, "-=0.4")
-      .from(".title-bottom", {
-        y: 100,
-        opacity: 0,
-        rotateX: 20,
-        duration: 1.2,
-        ease: "expo.out"
-      }, "-=1.0")
-      .from(".hero-tagline, .hero-cta", {
+      // Very simple, robust fade-in entrance
+      gsap.from(".hero-content > *", {
         opacity: 0,
         y: 20,
         duration: 0.8,
-        stagger: 0.2
-      }, "-=0.6");
-
+        stagger: 0.1,
+        ease: "power2.out"
+      });
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
 
-  const scrollToNext = () => {
-    const aboutSection = document.getElementById('about');
-    aboutSection?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const nameParts = personalInfo.name.split(' ');
-  const firstName = nameParts[0];
-  const lastName = nameParts.slice(1).join(' ');
+  const [firstName, lastName] = personalInfo.name.split(' ');
 
   return (
     <section ref={heroRef} className="hero" id="home">
-      <div className="hero-overlay"></div>
-      
-      <div className="hero-content">
-        <span className="hero-greeting">Digital Architect & Developer</span>
+      <div className="hero-content container">
+        <span className="hero-greeting">Lead Digital Architect</span>
         
         <h1 className="hero-title">
           <span className="title-top">{firstName}</span>
@@ -66,21 +34,16 @@ export default function Hero() {
         </h1>
 
         <p className="hero-tagline">
-          Crafting high-performance digital experiences through innovative code and award-winning design.
+          Designing and engineering high-impact digital experiences for the next generation.
         </p>
 
         <div className="hero-cta">
-          <Magnetic>
-            <a href="#works" className="btn btn-primary clickable">View Selected Works</a>
-          </Magnetic>
-          <Magnetic>
-            <a href="#contact" className="btn btn-outline clickable">Start a Project</a>
-          </Magnetic>
+          <a href="#works" className="btn btn-primary">Selected Works</a>
+          <a href="#contact" className="btn btn-outline">Start Project</a>
         </div>
       </div>
 
-      <div className="scroll-indicator" onClick={scrollToNext}>
-        <span>Scroll Down</span>
+      <div className="scroll-indicator" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
         <div className="scroll-line"></div>
       </div>
     </section>
