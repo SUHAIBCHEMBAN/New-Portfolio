@@ -1,96 +1,43 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import HeroImage from './HeroImage';
-import AnimatedTitle from '../shared/AnimatedTitle';
 import { personalInfo } from '../../data/personal';
+import Magnetic from '../shared/Magnetic';
 import './Hero.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const heroRef = useRef();
-  const contentRef = useRef();
-  const taglineRef = useRef();
-  const [currentTaglineIndex, setCurrentTaglineIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Animate out
-      gsap.to(taglineRef.current, {
-        opacity: 0,
-        y: -15,
-        duration: 0.5,
-        onComplete: () => {
-          setCurrentTaglineIndex((prev) => (prev + 1) % personalInfo.tagline.length);
-          gsap.fromTo(
-            taglineRef.current,
-            { opacity: 0, y: 15 },
-            { opacity: 1, y: 0, duration: 0.5 }
-          );
-        }
-      });
-    }, 4500);
-
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Initial Load Reveal
-      const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.5 } });
+      const tl = gsap.timeline();
 
-      tl.from(".hero-greeting", { opacity: 0, y: 20 })
-      .from(taglineRef.current, { opacity: 0, y: 20 }, "-=1.2")
-      .from(".hero-description", { opacity: 0, y: 20 }, "-=1")
-      .from(".hero-cta .btn", { opacity: 0, y: 20, stagger: 0.1 }, "-=1");
-
-      // 2. ANTIGRAVITY STYLE EXPANDING REVEAL
-      const revealTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "+=200%", // Longer duration for smoother feel
-          scrub: 1.2,
-          pin: true,
-          pinSpacing: true,
-          invalidateOnRefresh: true
-        }
-      });
-
-      // Perspective fade for content
-      revealTl.to(contentRef.current, {
-        opacity: 0,
-        y: -150,
-        scale: 0.8,
-        filter: "blur(20px)",
-        ease: "power2.in"
+      // Premium Entrance Animation Only (No scroll-triggered translation)
+      tl.from(".hero-greeting", { 
+        opacity: 0, 
+        y: 30,
+        duration: 0.8,
+        ease: "power3.out"
       })
-      .fromTo(".hero-reveal-box", 
-        { 
-          scale: 0.1, 
-          borderRadius: "60px",
-          opacity: 0,
-          rotateX: 45 // 3D perspective tilt
-        },
-        { 
-          scale: 1, 
-          borderRadius: "0px", 
-          opacity: 1,
-          rotateX: 0,
-          ease: "none"
-        },
-        "-=0.6"
-      )
-      .to(".reveal-content-preview", {
-        opacity: 1,
-        scale: 1,
-        duration: 0.5
+      .from(".title-top", {
+        y: 100,
+        opacity: 0,
+        rotateX: -20,
+        duration: 1.2,
+        ease: "expo.out"
       }, "-=0.4")
-      .to(".hero-reveal-box", {
-        backgroundColor: "rgba(0,0,0,1)",
-        duration: 0.3
-      });
+      .from(".title-bottom", {
+        y: 100,
+        opacity: 0,
+        rotateX: 20,
+        duration: 1.2,
+        ease: "expo.out"
+      }, "-=1.0")
+      .from(".hero-tagline, .hero-cta", {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        stagger: 0.2
+      }, "-=0.6");
 
     }, heroRef);
 
@@ -102,45 +49,39 @@ export default function Hero() {
     aboutSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  return (
-    <section ref={heroRef} className="hero no-image" id="home">
-      <div className="hero-container full-width">
-        <div ref={contentRef} className="hero-content gpu-accel">
-          <p className="hero-greeting">Hi, I'm</p>
-          <AnimatedTitle 
-            as="h1" 
-            text={personalInfo.name} 
-            className="hero-title"
-            mode="scatter"
-            gradient={true}
-          />
-          <p ref={taglineRef} className="hero-tagline gradient-text">{personalInfo.tagline[currentTaglineIndex]}</p>
-          <p className="hero-description">{personalInfo.bio[0]}</p>
-          <div className="hero-cta">
-            <a href="#contact" className="btn btn-primary">
-              Get In Touch
-            </a>
-            <a href="#works" className="btn btn-outline">
-              View Work
-            </a>
-          </div>
-        </div>
-      </div>
+  const nameParts = personalInfo.name.split(' ');
+  const firstName = nameParts[0];
+  const lastName = nameParts.slice(1).join(' ');
 
-      <div className="hero-reveal-container">
-        <div className="hero-reveal-box">
-          <div className="reveal-content-preview">
-            <span className="reveal-label">Discover</span>
-            <h2 className="reveal-text">Who I Am</h2>
-          </div>
+  return (
+    <section ref={heroRef} className="hero" id="home">
+      <div className="hero-overlay"></div>
+      
+      <div className="hero-content">
+        <span className="hero-greeting">Digital Architect & Developer</span>
+        
+        <h1 className="hero-title">
+          <span className="title-top">{firstName}</span>
+          <span className="title-bottom">{lastName}</span>
+        </h1>
+
+        <p className="hero-tagline">
+          Crafting high-performance digital experiences through innovative code and award-winning design.
+        </p>
+
+        <div className="hero-cta">
+          <Magnetic>
+            <a href="#works" className="btn btn-primary clickable">View Selected Works</a>
+          </Magnetic>
+          <Magnetic>
+            <a href="#contact" className="btn btn-outline clickable">Start a Project</a>
+          </Magnetic>
         </div>
       </div>
 
       <div className="scroll-indicator" onClick={scrollToNext}>
-        <div className="scroll-mouse">
-          <div className="scroll-wheel"></div>
-        </div>
-        <span>Scroll</span>
+        <span>Scroll Down</span>
+        <div className="scroll-line"></div>
       </div>
     </section>
   );

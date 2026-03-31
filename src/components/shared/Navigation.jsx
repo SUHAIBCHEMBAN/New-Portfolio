@@ -1,23 +1,18 @@
 import { useState, useEffect } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import Magnetic from './Magnetic';
 import './Navigation.css';
 
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      // Update active section based on scroll position
       const sections = ['home', 'about', 'works', 'resume', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
+          return rect.top <= 150 && rect.bottom >= 150;
         }
         return false;
       });
@@ -31,44 +26,33 @@ export default function Navigation() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
-    setIsMobileMenuOpen(false);
   };
 
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'works', label: 'Works' },
-    { id: 'resume', label: 'Resume' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'works', label: 'Work' },
+    { id: 'resume', label: 'Path' },
+    { id: 'contact', label: 'Hello' }
   ];
 
   return (
-    <nav className={`navigation ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className="navigation">
       <div className="nav-container">
-        <div className="nav-logo" onClick={() => scrollToSection('home')}>
-          <span className="gradient-text">Portfolio</span>
-        </div>
-
-        <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+        <ul className="nav-menu">
           {navItems.map(item => (
             <li key={item.id}>
-              <button
-                className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
-                onClick={() => scrollToSection(item.id)}
-              >
-                {item.label}
-              </button>
+              <Magnetic>
+                <button
+                  className={`nav-link clickable ${activeSection === item.id ? 'active' : ''}`}
+                  onClick={() => scrollToSection(item.id)}
+                >
+                  {item.label}
+                </button>
+              </Magnetic>
             </li>
           ))}
         </ul>
-
-        <button
-          className="mobile-menu-toggle"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-        </button>
       </div>
     </nav>
   );

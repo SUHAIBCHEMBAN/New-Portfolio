@@ -13,7 +13,7 @@ export const personalInfo = {
     "Over the years, I've had the privilege of working with diverse clients and companies, from e-commerce platforms like Faakart to creative agencies like Creativio Media. These experiences have honed my ability to not just write clean code, but to understand business needs and deliver products that truly make an impact.",
     "When I'm not coding, you can find me exploring the latest tech trends, contributing to open-source projects, or refining my skills in UI/UX design. I'm always open to new opportunities and collaborations—let's build something amazing together!"
   ],
-  email: "shuhaibchemban2004@gmail.com",
+  email: "shuhaibc2004@gmail.com",
   phone: "+91 9947896956",
   location: "Malappuram, Kerala, India",
   social: {

@@ -1,314 +1,109 @@
 .resume {
     background: var(--bg-primary);
-    position: relative;
     padding: var(--spacing-3xl) 0;
-}
-
-.resume-content {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.resume-download {
-    text-align: center;
-    margin-bottom: var(--spacing-3xl);
-}
-
-.resume-download .btn {
-    padding: 1.2rem 2.5rem;
-    font-size: 1rem;
-    border-radius: 50px;
-    background: #ffffff;
-    color: #000000;
-}
-
-/* Modern Timeline Styling */
-.timeline-section {
-    margin-bottom: var(--spacing-3xl);
-}
-
-.timeline-section h3 {
-    font-family: var(--font-heading);
-    font-size: clamp(2.2rem, 6vw, 3rem);
-    margin-bottom: var(--spacing-2xl);
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.timeline-section h3::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
-}
-
-.timeline {
     position: relative;
-    padding-left: 50px;
 }
 
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(180deg, #ffffff, transparent);
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: var(--spacing-2xl);
-}
-
-.timeline-dot {
-    position: absolute;
-    left: -58px;
-    top: 0;
-    width: 16px;
-    height: 16px;
-    background: #000;
-    border: 2px solid #fff;
-    border-radius: 100%;
-    z-index: 2;
-}
-
-.timeline-content {
-    background: #0a0a0a;
-    padding: var(--spacing-xl);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all var(--transition-normal);
-}
-
-.timeline-content:hover {
-    transform: translateX(10px);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.timeline-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: var(--spacing-md);
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.timeline-company,
-.timeline-institution {
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.timeline-position,
-.timeline-degree {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-tertiary);
-    margin-bottom: 0.5rem;
-}
-
-.timeline-duration {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 700;
-}
-
-.experience-points li {
-    position: relative;
-    padding-left: 1.5rem;
-    margin-bottom: 0.8rem;
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-}
-
-.experience-points li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--text-tertiary);
-}
-
-.timeline-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-top: var(--spacing-xl);
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.timeline-tech span {
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--text-secondary);
-    padding: 0.4rem 0.8rem;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Expanding Achievements Styling */
-.achievements-expand-container {
-    height: 180vh;
-    position: relative;
-    width: 100%;
-}
-
-.expanding-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin: 0 auto;
-}
-
-.achievement-content-wrap {
-    text-align: center;
-    padding: var(--spacing-2xl);
-    width: 100%;
-    max-width: 1200px;
-}
-
-.expanding-title {
-    font-size: clamp(3rem, 10vw, 8rem);
-    font-weight: 900;
-    color: #fff;
-    margin-bottom: var(--spacing-3xl);
-    letter-spacing: -0.05em;
-    line-height: 0.9;
-}
-
-.milestones-grid {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-    gap: var(--spacing-3xl);
-    width: 100%;
-    padding: 0 var(--spacing-lg);
-}
-
-.achievement-milestone {
+.resume-list {
+    margin-top: var(--spacing-2xl);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    flex: 1;
-    min-width: 250px;
-    padding: var(--spacing-xl);
+}
+
+.resume-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 3.5rem 0;
+    cursor: default;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.resume-row:hover {
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
+    padding-left: 1.5rem;
+}
+
+.resume-row:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.resume-row-inner {
+    display: grid;
+    grid-template-columns: 120px 1.5fr 2fr 1fr;
+    align-items: flex-start;
+    gap: 3rem;
+    width: 100%;
+}
+
+.resume-year {
+    font-family: var(--font-heading);
+    color: var(--text-tertiary);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.resume-company {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--text-primary);
+    letter-spacing: -0.04em;
+}
+
+.resume-company span {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    margin-top: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.resume-details {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.resume-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: flex-end;
+}
+
+.tech-tag {
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    color: var(--text-tertiary);
+    font-weight: 600;
     transition: all 0.3s ease;
 }
 
-.achievement-milestone:hover {
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-10px);
+.resume-row:hover .tech-tag {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
 }
 
-.milestone-value {
-    font-family: var(--font-heading);
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 800;
-    color: #fff;
-    line-height: 1;
-}
-
-.milestone-label {
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 1rem 0;
-}
-
-.milestone-desc {
-    font-size: 0.85rem;
-    color: var(--text-tertiary);
-    max-width: 250px;
-}
-
-@media (max-width: 1024px) {
-    .milestones-grid {
-        flex-wrap: wrap;
-        justify-content: center;
+@media (max-width: 1200px) {
+    .resume-row-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
-}
-
-@media (max-width: 768px) {
-    .timeline {
-        padding-left: 30px;
+    
+    .resume-tech {
+        justify-content: flex-start;
+        margin-top: 1rem;
     }
-
-    .timeline-dot {
-        left: -38px;
-    }
-
-    .timeline-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .timeline-content {
-        padding: var(--spacing-lg);
-    }
-
-    .achievements-expand-container {
-        height: auto;
-        padding-bottom: var(--spacing-3xl);
-    }
-
-    .expanding-box {
-        width: 100% !important;
-        height: auto !important;
-        transform: none !important;
-        border-radius: 0 !important;
-        padding: var(--spacing-2xl) 0;
-        background: #000 !important;
-    }
-
-    .expanding-title {
-        font-size: clamp(2.5rem, 8vw, 4rem);
-        margin-bottom: var(--spacing-xl);
-    }
-
-    .achievement-content-wrap {
-        padding: var(--spacing-xl) var(--spacing-md);
-    }
-
-    .milestones-grid {
-        flex-direction: column;
-        align-items: center;
-        gap: var(--spacing-lg);
-        padding: 0 var(--spacing-sm);
-    }
-
-    .achievement-milestone {
-        width: 100%;
-        min-width: unset;
-        padding: var(--spacing-lg);
-    }
-
-    .milestone-value {
-        font-size: 3rem;
-    }
-
-    .milestone-desc {
-        max-width: unset;
+    
+    .resume-company {
+        font-size: 1.8rem;
     }
 }

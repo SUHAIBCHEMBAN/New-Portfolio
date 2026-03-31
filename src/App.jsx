@@ -8,6 +8,9 @@ import Resume from './components/Resume/Resume';
 import Contact from './components/Contact/Contact';
 import Footer from './components/shared/Footer';
 import BackgroundCanvas from './components/Canvas3D/BackgroundCanvas';
+import CustomCursor from './components/shared/CustomCursor';
+import BackgroundDecor from './components/shared/BackgroundDecor';
+import SectionColorTracker from './components/shared/SectionColorTracker';
 import './App.css';
 
 function App() {
@@ -38,6 +41,9 @@ function App() {
   }, [])
   return (
     <div className="App">
+      <CustomCursor />
+      <BackgroundDecor />
+      <SectionColorTracker />
       <BackgroundCanvas />
       <Navigation />
       <main style={{ position: 'relative', zIndex: 1, backgroundColor: 'transparent' }}>
