@@ -14,7 +14,14 @@ import SectionColorTracker from './components/shared/SectionColorTracker';
 import './App.css';
 
 function App() {
+  const isLiteMode =
+    typeof window !== 'undefined' &&
+    (window.matchMedia('(max-width: 768px)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
   useEffect(() => {
+    if (isLiteMode) return;
+
     // Initialize Lenis for premium smooth scrolling
     const lenis = new Lenis({
       duration: 1.2,
@@ -28,22 +35,24 @@ function App() {
       infinite: false,
     })
 
+    let frameId = 0;
     function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
+      lenis.raf(time);
+      frameId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf)
+    frameId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(frameId);
       lenis.destroy();
-    }
-  }, [])
+    };
+  }, [isLiteMode]);
   return (
     <div className="App">
-      <CustomCursor />
-      <BackgroundDecor />
-      <SectionColorTracker />
+      {!isLiteMode && <CustomCursor />}
+      {!isLiteMode && <BackgroundDecor />}
+      {!isLiteMode && <SectionColorTracker />}
       <BackgroundCanvas />
       <Navigation />
       <main style={{ position: 'relative', zIndex: 1, backgroundColor: 'transparent' }}>

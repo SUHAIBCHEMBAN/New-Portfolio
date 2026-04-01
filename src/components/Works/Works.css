@@ -77,10 +77,26 @@
     object-fit: cover;
 }
 
+/* Special handling for Sameer Informatics (id: 13) to show full image */
+.card-visual.image-contain .image-container,
+.card-visual.image-contain .image-container img {
+    object-fit: cover;
+}
+
 .card-content {
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+@media (min-width: 1101px) {
+    .modern-project-card.card-reverse .card-visual {
+        order: 2;
+    }
+
+    .modern-project-card.card-reverse .card-content {
+        order: 1;
+    }
 }
 
 .project-headline {
@@ -134,17 +150,21 @@
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
+        box-sizing: border-box !important;
     }
 
     .card-visual,
     .card-content {
         width: 100% !important;
         max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .card-visual {
         aspect-ratio: 4/3;
         border-radius: 2rem;
+        width: calc(100% - 3rem) !important;
+        margin: 0 auto !important;
     }
 
     /* Ensure text doesn't push the container */
@@ -153,10 +173,14 @@
         text-align: center;
         margin-left: auto;
         margin-right: auto;
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
 
     .tech-tags-wrapper {
         justify-content: center;
+        max-width: 100%;
     }
 
     .card-btn-wrap {

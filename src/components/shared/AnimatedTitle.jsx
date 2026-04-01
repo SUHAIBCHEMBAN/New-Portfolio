@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default function AnimatedTitle({
   text = "",
   className = '',
-  as: Component = 'h2',
   mode = 'auto',
   delay = 0,
   gradient = true,
@@ -18,6 +17,9 @@ export default function AnimatedTitle({
     if (!containerRef.current) return;
     const el = containerRef.current;
     if (!text) return;
+    const isLiteMode =
+      window.matchMedia('(max-width: 768px)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const words = text.split(' ');
     let resolvedMode = mode;
@@ -33,6 +35,11 @@ export default function AnimatedTitle({
       const items = el.querySelectorAll(animateTarget);
       
       if (!items.length) return;
+
+      if (isLiteMode) {
+        gsap.set(items, { opacity: 1, y: 0, rotateX: 0 });
+        return;
+      }
 
       // Ensure they show immediately if anything fails
       gsap.from(items, {
@@ -57,12 +64,8 @@ export default function AnimatedTitle({
   if (!text) return null;
 
   const words = text.split(' ');
-  const resolvedMode = mode === 'auto'
-    ? (words.length === 1 ? 'split' : words.length === 2 ? 'skew' : 'reveal')
-    : mode;
-
   return (
-    <Component
+    <h2
       ref={containerRef}
       className={`animated-title-unique ${className}`}
       style={{ overflow: 'hidden' }}
@@ -81,6 +84,6 @@ export default function AnimatedTitle({
           </span>
         </span>
       ))}
-    </Component>
+    </h2>
   );
 }

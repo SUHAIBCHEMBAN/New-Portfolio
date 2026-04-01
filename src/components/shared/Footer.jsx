@@ -10,6 +10,11 @@ export default function Footer() {
   const footerRef = useRef();
 
   useEffect(() => {
+    const isLiteMode =
+      window.matchMedia('(max-width: 768px)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isLiteMode) return;
+
     const ctx = gsap.context(() => {
       gsap.to(marqueeRef.current, {
         xPercent: -50,

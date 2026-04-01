@@ -6,7 +6,12 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
       const sections = ['home', 'about', 'works', 'resume', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
@@ -17,9 +22,12 @@ export default function Navigation() {
         return false;
       });
       if (current) setActiveSection(current);
+      ticking = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

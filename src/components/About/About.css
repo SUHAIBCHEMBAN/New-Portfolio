@@ -30,6 +30,12 @@
     transform: translateY(-5px);
 }
 
+/* Keep gradient items bright on hover */
+.item-stats:hover {
+    background: var(--accent-gradient);
+    transform: translateY(-5px);
+}
+
 .bio-content p {
     font-size: clamp(1rem, 1.6vw, 1.15rem);
     line-height: 1.7;

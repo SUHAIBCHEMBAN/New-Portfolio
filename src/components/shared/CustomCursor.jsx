@@ -3,12 +3,17 @@ import gsap from 'gsap';
 import './CustomCursor.css';
 
 export default function CustomCursor() {
+  const cursorEnabled =
+    typeof window !== 'undefined' &&
+    !window.matchMedia('(hover: none)').matches &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cursorRef = useRef(null);
   const followerRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
-  const [isLinkHovered, setIsLinkHovered] = useState(false);
 
   useEffect(() => {
+    if (!cursorEnabled) return;
+
     const cursor = cursorRef.current;
     const follower = followerRef.current;
 
@@ -36,7 +41,6 @@ export default function CustomCursor() {
     const handleLinkHover = (e) => {
       const target = e.target.closest('a, button, .clickable');
       if (target) {
-        setIsLinkHovered(true);
         gsap.to(follower, {
           scale: 3,
           duration: 0.3,
@@ -44,7 +48,6 @@ export default function CustomCursor() {
           mixBlendMode: 'difference'
         });
       } else {
-        setIsLinkHovered(false);
         gsap.to(follower, {
           scale: 1,
           duration: 0.3,
@@ -65,7 +68,9 @@ export default function CustomCursor() {
       document.body.removeEventListener('mouseenter', onMouseEnter);
       document.body.removeEventListener('mouseleave', onMouseLeave);
     };
-  }, []);
+  }, [cursorEnabled]);
+
+  if (!cursorEnabled) return null;
 
   return (
     <>

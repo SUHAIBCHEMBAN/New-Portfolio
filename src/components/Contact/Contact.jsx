@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import gsap from 'gsap';
 import { personalInfo } from '../../data/personal';
 import AnimatedTitle from '../shared/AnimatedTitle';
 import Magnetic from '../shared/Magnetic';
@@ -41,7 +40,7 @@ export default function Contact() {
       } else {
         throw new Error(result.message);
       }
-    } catch (error) {
+    } catch {
       setFormStatus({
         type: 'error',
         message: 'Oops! Something went wrong. Please try again.'

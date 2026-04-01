@@ -11,10 +11,15 @@ export default function Resume() {
   const sectionRef = useRef();
 
   useEffect(() => {
+    const isLiteMode =
+      window.matchMedia('(max-width: 768px)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isLiteMode) return;
+
     const ctx = gsap.context(() => {
       // Animate resume rows as they appear on scroll
       const rows = gsap.utils.toArray('.resume-row');
-      rows.forEach((row, i) => {
+      rows.forEach((row) => {
         gsap.fromTo(row, 
           { opacity: 0, y: 50 },
           { 

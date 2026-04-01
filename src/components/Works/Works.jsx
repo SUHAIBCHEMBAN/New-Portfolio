@@ -12,6 +12,12 @@ export default function Works() {
   const sectionRef = useRef();
 
   useEffect(() => {
+    const isLiteMode =
+      window.matchMedia('(max-width: 768px)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isLiteMode) return;
+
     // Robust, non-blocking entrance animations
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.modern-project-card');
@@ -64,13 +70,23 @@ export default function Works() {
         </header>
         
         <div className="projects-display">
-          {projects.map((project) => (
-            <div key={project.id} className="modern-project-card">
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              className={`modern-project-card ${index % 2 === 1 ? 'card-reverse' : ''}`}
+            >
               <div className="card-inner">
                 {/* Visual Frame - Uniform Across All Cards */}
                 <div className="card-visual gpu-accel">
                   <div className="image-container">
-                    <img src={project.image} alt={project.title} loading="lazy" />
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1100px) 90vw, 50vw"
+                    />
                   </div>
                 </div>
 
