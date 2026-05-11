@@ -23,10 +23,22 @@
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease, width 0.3s ease, height 0.3s ease;
   mix-blend-mode: difference;
   will-change: transform, width, height, background-color;
   background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-text {
+  font-family: var(--font-heading);
+  font-size: 3.5px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.1em;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {

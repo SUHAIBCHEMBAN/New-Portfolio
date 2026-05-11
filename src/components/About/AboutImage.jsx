@@ -1,9 +1,41 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaUser } from 'react-icons/fa';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutImage() {
   const frameRef = useRef();
+
+  useEffect(() => {
+    const isLiteMode =
+      window.matchMedia('(max-width: 768px)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isLiteMode) return;
+
+    const ctx = gsap.context(() => {
+      // Premium clip-path reveal
+      gsap.fromTo(".about-image-inner img", 
+        { 
+          clipPath: "inset(100% 0% 0% 0%)",
+          scale: 1.2
+        },
+        { 
+          clipPath: "inset(0% 0% 0% 0%)",
+          scale: 1,
+          duration: 1.5, 
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: frameRef.current,
+            start: "top 85%"
+          }
+        }
+      );
+    }, frameRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleMouseMove = (e) => {
     const { clientX, clientY, currentTarget } = e;
@@ -37,17 +69,13 @@ export default function AboutImage() {
       className="about-image-container" 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      ref={frameRef}
     >
-      <div className="about-image-frame" ref={frameRef}>
-        <div className="about-image-inner">
-          {/* Replace with your actual image path */}
-          {/* <FaUser /> */}
-          <img src="/assets/profile.PNG" alt="Suhaib - Full Stack Developer" className="about-profile-photo" />
-          {/* <img src="/path/to/your/photo.jpg" alt="Profile" /> */}
-        </div>
-        <div className="about-image-border" />
-        <div className="about-image-glow" />
-      </div>
+      <img 
+        src="/assets/profile.PNG" 
+        alt="Suhaib - Full Stack Developer" 
+        className="about-profile-photo" 
+      />
     </div>
   );
 }

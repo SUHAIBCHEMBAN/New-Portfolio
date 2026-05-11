@@ -1,109 +1,171 @@
-.resume {
+/* ══════════════════════════════════════
+   RESUME — Accordion Timeline
+══════════════════════════════════════ */
+.resume-section {
     background: var(--bg-primary);
     padding: var(--spacing-3xl) 0;
     position: relative;
+    border-top: 1px solid var(--border);
 }
 
-.resume-list {
-    margin-top: var(--spacing-2xl);
+.resume-header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
 }
 
-.resume-row {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 3.5rem 0;
-    cursor: default;
-    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    position: relative;
-    overflow: hidden;
+.resume-accordion {
+    border-top: 1px solid var(--border);
 }
 
-.resume-row:hover {
-    background: rgba(255, 255, 255, 0.02);
-    padding-left: 1.5rem;
+.resume-accordion-item {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s ease;
 }
 
-.resume-row:last-child {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+.resume-accordion-item:hover {
+    background: rgba(255, 255, 255, 0.01);
 }
 
-.resume-row-inner {
-    display: grid;
-    grid-template-columns: 120px 1.5fr 2fr 1fr;
-    align-items: flex-start;
-    gap: 3rem;
+.resume-accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 0;
     width: 100%;
+}
+
+.resume-col-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 .resume-year {
     font-family: var(--font-heading);
-    color: var(--text-tertiary);
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     font-weight: 700;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
     letter-spacing: 0.1em;
+    width: 60px;
 }
 
 .resume-company {
-    font-family: var(--font-heading);
-    font-size: 2.2rem;
-    font-weight: 900;
-    line-height: 1;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 400;
     color: var(--text-primary);
-    letter-spacing: -0.04em;
+    margin: 0;
+    line-height: 1;
+    transition: color 0.3s ease;
 }
 
-.resume-company span {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
+.resume-accordion-item:hover .resume-company {
     color: var(--accent-primary);
-    margin-top: 0.75rem;
+}
+
+.resume-col-right {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.resume-position {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-}
-
-.resume-details {
     color: var(--text-secondary);
-    font-size: 1.05rem;
-    line-height: 1.6;
 }
 
-.resume-tech {
+.accordion-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--text-tertiary);
+    transition: transform 0.4s ease, color 0.3s ease;
+}
+
+.resume-accordion-item:hover .accordion-icon {
+    color: var(--accent-primary);
+}
+
+.accordion-icon.open {
+    transform: rotate(45deg);
+    color: var(--accent-primary);
+}
+
+/* ── Body ── */
+.resume-accordion-body {
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.resume-body-inner {
+    padding: 0 0 3rem 80px; /* Aligns with company name */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+}
+
+.resume-desc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.resume-desc li {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.resume-desc li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+}
+
+.resume-tech-list {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
-    justify-content: flex-end;
+    align-content: flex-start;
 }
 
-.tech-tag {
+.resume-tech-tag {
     font-size: 0.75rem;
-    padding: 0.4rem 1rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 100px;
-    color: var(--text-tertiary);
     font-weight: 600;
-    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    color: var(--text-tertiary);
 }
 
-.resume-row:hover .tech-tag {
-    border-color: rgba(255, 255, 255, 0.2);
-    color: var(--text-primary);
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .resume-body-inner { grid-template-columns: 1fr; gap: 2rem; padding-right: 2rem; }
 }
 
-@media (max-width: 1200px) {
-    .resume-row-inner {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .resume-tech {
-        justify-content: flex-start;
-        margin-top: 1rem;
-    }
-    
-    .resume-company {
-        font-size: 1.8rem;
-    }
+@media (max-width: 768px) {
+    .resume-header { flex-direction: column; align-items: flex-start; gap: 2rem; }
+    .resume-accordion-header { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 2rem 0; }
+    .resume-col-left { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .resume-year { width: auto; }
+    .resume-col-right { width: 100%; justify-content: space-between; }
+    .resume-body-inner { padding: 0 0 2rem 0; }
+    .resume-company { font-size: 2rem; }
 }

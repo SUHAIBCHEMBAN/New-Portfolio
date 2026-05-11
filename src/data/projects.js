@@ -146,6 +146,17 @@ export const projects = [
         liveUrl: "https://www.sami-me.com",
         githubUrl: null,
         featured: false
+    },
+    {
+        id: 14,
+        title: "ADOPIC MARKETING AGENCY",
+        description: "A static information website for a marketing agency, showcasing their recent work, company history, and providing services.",
+        image: "/images/adopicads.png",
+        technologies: ["Static", "Marketing", "Informational"],
+        category: "Static",
+        liveUrl: "https://www.adopic.ads",
+        githubUrl: null,
+        featured: true
     }
 
 ];

@@ -64,6 +64,10 @@ export default function AnimatedTitle({
   if (!text) return null;
 
   const words = text.split(' ');
+  
+  // Decide whether to split characters or just words based on mode
+  const resolvedMode = mode === 'auto' ? (words.length === 1 ? 'split' : 'reveal') : mode;
+
   return (
     <h2
       ref={containerRef}
@@ -76,12 +80,22 @@ export default function AnimatedTitle({
           className="word-mask" 
           style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', marginRight: '0.3em' }}
         >
-          <span 
-            className={`word-inner gpu-accel ${wi === words.length - 1 && gradient ? 'gradient-text' : ''}`}
-            style={{ display: 'inline-block' }}
-          >
-            {word}
-          </span>
+          {resolvedMode === 'split' ? (
+             <span className={`word-inner gpu-accel ${wi === words.length - 1 && gradient ? 'gradient-text' : ''}`} style={{ display: 'inline-block' }}>
+               {word.split('').map((char, ci) => (
+                 <span key={ci} className="char" style={{ display: 'inline-block', transformOrigin: 'bottom center' }}>
+                   {char}
+                 </span>
+               ))}
+             </span>
+          ) : (
+            <span 
+              className={`word-inner gpu-accel ${wi === words.length - 1 && gradient ? 'gradient-text' : ''}`}
+              style={{ display: 'inline-block' }}
+            >
+              {word}
+            </span>
+          )}
         </span>
       ))}
     </h2>

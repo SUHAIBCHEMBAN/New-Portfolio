@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projects } from '../../data/projects';
@@ -10,109 +10,133 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Works() {
   const sectionRef = useRef();
+  const [hoveredProject, setHoveredProject] = useState(null);
+  const cursorRef = useRef(null);
 
   useEffect(() => {
     const isLiteMode =
       window.matchMedia('(max-width: 768px)').matches ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (isLiteMode) return;
-
-    // Robust, non-blocking entrance animations
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray('.modern-project-card');
-      
-      cards.forEach((card) => {
-        const visual = card.querySelector('.card-visual');
-        const content = card.querySelector('.card-content');
-        
-        // Simple, clean reveals that ensure content is always visible
-        gsap.from(visual, {
-          opacity: 0,
-          y: 60,
-          scale: 0.95,
-          duration: 1.2,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            toggleActions: "play none none none"
-          }
+    if (isLiteMode) {
+      const ctx = gsap.context(() => {
+        const rows = gsap.utils.toArray('.works-list-row');
+        rows.forEach((row) => {
+          gsap.from(row, {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: row,
+              start: "top 85%",
+            }
+          });
         });
+      }, sectionRef);
+      return () => ctx.revert();
+    }
 
-        gsap.from(content, {
+    const ctx = gsap.context(() => {
+      // Reveal rows
+      const rows = gsap.utils.toArray('.works-list-row');
+      rows.forEach((row) => {
+        gsap.from(row, {
           opacity: 0,
           y: 40,
           duration: 1,
-          delay: 0.2,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
+            trigger: row,
+            start: "top 90%",
           }
         });
       });
+
+      // Hover image cursor follow
+      const moveCursor = (e) => {
+        if (!cursorRef.current) return;
+        gsap.to(cursorRef.current, {
+          x: e.clientX,
+          y: e.clientY,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+      };
+
+      window.addEventListener('mousemove', moveCursor);
+      return () => {
+        window.removeEventListener('mousemove', moveCursor);
+      };
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="works-unique" id="works">
-      {/* Background Marquee - Fixed & Low Prominence */}
-      <div className="works-marquee-wrapper">
-        <div className="works-marquee-static">Projects • Experience • Solutions • Works • </div>
-      </div>
-
+    <section ref={sectionRef} className="works-list-section" id="works">
       <div className="container">
-        <header className="works-header" style={{ marginBottom: '5rem' }}>
-          <AnimatedTitle text="Selected Works" mode="reveal" />
+        <header className="works-list-header">
+          <AnimatedTitle text="Selected Works" mode="split" />
+          <div className="works-list-meta">
+            <span className="works-count">[{projects.length}]</span>
+            <span className="works-label">Recent Projects</span>
+          </div>
         </header>
         
-        <div className="projects-display">
+        <div className="works-list-container">
+          <div className="works-list-headings">
+            <div className="col-idx">ID</div>
+            <div className="col-title">Project</div>
+            <div className="col-role">Category</div>
+            <div className="col-tech">Stack</div>
+            <div className="col-link">Link</div>
+          </div>
+
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className={`modern-project-card ${index % 2 === 1 ? 'card-reverse' : ''}`}
+              className="works-list-row clickable"
+              onMouseEnter={() => setHoveredProject(project)}
+              onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="card-inner">
-                {/* Visual Frame - Uniform Across All Cards */}
-                <div className="card-visual gpu-accel">
-                  <div className="image-container">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      loading="lazy"
-                      decoding="async"
-                      fetchPriority="low"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1100px) 90vw, 50vw"
-                    />
-                  </div>
-                </div>
-
-                {/* Content Block */}
-                <div className="card-content">
-                  <h3 className="project-headline">{project.title}</h3>
-                  <p className="project-brief">{project.description}</p>
-                  
-                  <div className="project-tech-stack">
-                    <div className="tech-tags-wrapper">
-                      {project.technologies?.slice(0, 4).map((tech, i) => (
-                        <span key={i} className="tech-tag-item">{tech}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="card-btn-wrap">
-                    <Magnetic>
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary clickable">
-                        Explore Project
-                      </a>
-                    </Magnetic>
-                  </div>
-                </div>
+              <div className="col-idx">
+                {(index + 1).toString().padStart(2, '0')}
+              </div>
+              <div className="col-title">
+                <h3>{project.title}</h3>
+                <img src={project.image} alt={project.title} className="works-mobile-img" />
+              </div>
+              <div className="col-role">
+                {project.category}
+              </div>
+              <div className="col-tech">
+                {project.technologies?.slice(0, 3).join(' / ')}
+              </div>
+              <div className="col-link">
+                 {project.liveUrl && (
+                   <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="works-external-link">
+                     Visit ↗
+                   </a>
+                 )}
               </div>
             </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Hover Image Reveal */}
+      <div 
+        ref={cursorRef} 
+        className={`works-hover-reveal ${hoveredProject ? 'active' : ''}`}
+      >
+        <div className="works-hover-inner">
+          {projects.map(p => (
+            <img 
+              key={p.id}
+              src={p.image} 
+              alt={p.title} 
+              className={`works-hover-img ${hoveredProject?.id === p.id ? 'active' : ''}`}
+            />
           ))}
         </div>
       </div>

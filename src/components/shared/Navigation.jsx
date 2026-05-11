@@ -47,20 +47,26 @@ export default function Navigation() {
   return (
     <nav className="navigation">
       <div className="nav-container">
-        <ul className="nav-menu">
-          {navItems.map(item => (
-            <li key={item.id}>
-              <Magnetic>
-                <button
-                  className={`nav-link clickable ${activeSection === item.id ? 'active' : ''}`}
-                  onClick={() => scrollToSection(item.id)}
-                >
-                  {item.label}
-                </button>
-              </Magnetic>
-            </li>
-          ))}
-        </ul>
+        <div className="nav-pill-wrapper">
+          <div className="nav-logo-side">
+            <span className="logo-dot"></span>
+            <span className="logo-text">S. Chemban</span>
+          </div>
+          <ul className="nav-menu">
+            {navItems.map(item => (
+              <li key={item.id}>
+                <Magnetic>
+                  <button
+                    className={`nav-link clickable ${activeSection === item.id ? 'active' : ''}`}
+                    onClick={() => scrollToSection(item.id)}
+                  >
+                    {item.label}
+                  </button>
+                </Magnetic>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </nav>
   );

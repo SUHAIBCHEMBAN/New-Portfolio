@@ -1,61 +1,88 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { skills } from '../../data/skills';
 import AboutImage from './AboutImage';
+import AnimatedTitle from '../shared/AnimatedTitle';
 import './About.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function About() {
+  const sectionRef = useRef(null);
   const safeSkills = Array.isArray(skills) ? skills : [];
 
+  useEffect(() => {
+    const isLiteMode =
+      window.matchMedia('(max-width: 768px)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isLiteMode) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from('.about-block', {
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.about-grid',
+          start: 'top 85%',
+        }
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="about section" id="about">
+    <section ref={sectionRef} className="about-section" id="about">
       <div className="container">
-        <header className="about-header" style={{ marginBottom: '4rem' }}>
-          <h2 className="about-heading" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '2rem' }}>
-            Behind the <span className="gradient-text">Code</span>
-          </h2>
+        <header className="about-header">
+          <AnimatedTitle text="About" mode="split" />
         </header>
 
-        <div className="bento-grid">
-          {/* Detailed Narrative Bento */}
-          <div className="bento-item item-bio gpu-accel" style={{ gridColumn: 'span 3', gridRow: 'span 2' }}>
-            <span className="bento-title">The Foundation</span>
+        <div className="about-grid">
+          {/* Block 1: Bio */}
+          <div className="about-block bio-block">
+            <h3 className="block-title">01 — Background</h3>
             <div className="bio-content">
-              <p>Hello! I'm Suhaib, a passionate Full-Stack Developer based in Malappuram, Kerala. My journey into the world of technology began with a curiosity about how things work on the web, which quickly evolved into a dedicated career in building robust and scalable applications.</p>
-              <p>I specialize in the Python and JavaScript ecosystems, with deep expertise in Django, React, and modern web technologies. Whether it's crafting high-performance backend systems or designing intuitive, pixel-perfect user interfaces, I enjoy turning complex problems into elegant digital solutions.</p>
-              <p>Over the years, I have had the opportunity to work with diverse clients and companies, from e-commerce platforms like Faakart to creative agencies like Creativio Media. These experiences have strengthened my ability not only to write clean code but also to understand business needs and deliver impactful products.</p>
-              <p>When I’m not coding, I explore the latest tech trends, contribute to open-source projects, and refine my skills in UI/UX design. I’m always open to new opportunities and collaborations—let’s build something amazing together!</p>
+              <p className="lead-paragraph">
+                I am a Full-Stack Developer specializing in high-performance web applications and premium digital experiences.
+              </p>
+              <p>
+                Based in Kerala, India, my foundation is built on Python and JavaScript ecosystems. From engineering robust backend systems with Django to crafting fluid, responsive interfaces in React, I bridge the gap between complex logic and beautiful design.
+              </p>
+              <p>
+                My approach is deeply analytical yet highly creative—treating code not just as instructions, but as the architecture of a brand's digital presence.
+              </p>
             </div>
           </div>
 
-          <div className="bento-item item-stats gpu-accel">
-            <span className="bento-title">Tenure</span>
-            <div className="stat-value">2+</div>
-            <div className="stat-label">Years of Innovation</div>
+          {/* Block 2: Visual */}
+          <div className="about-block image-block">
+            <div className="about-image-wrapper">
+              <AboutImage />
+            </div>
           </div>
 
-          <div className="bento-item item-image gpu-accel" style={{ padding: 0 }}>
-             <AboutImage />
-          </div>
-
-          <div className="bento-item item-stats item-projects gpu-accel">
-            <span className="bento-title">Works</span>
-            <div className="stat-value">15+</div>
-            <div className="stat-label">Successful Deliveries</div>
-          </div>
-
-          {/* Full Skills Ecosystem */}
-          {safeSkills.map((category, idx) => (
-            <div key={idx} className={`bento-item item-skills-cat cat-${category.category?.toLowerCase() || idx} gpu-accel`} style={{ gridColumn: 'span 2' }}>
-              <span className="bento-title">{category.category} Stack</span>
-              <div className="skills-grid-inner">
-                {category.items?.map((skill, sIdx) => (
-                  <div key={sIdx} className="skill-tag-full" style={{ padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', gap: '0.75rem', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '1rem', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                    <span className="skill-tag-name" style={{ fontSize: '0.85rem', fontWeight: 700 }}>{skill.name}</span>
-                    <span className="skill-tag-level" style={{ fontSize: '0.75rem', opacity: 0.5 }}>{skill.level}%</span>
+          {/* Block 3: Arsenal */}
+          <div className="about-block skills-block">
+            <h3 className="block-title">02 — Arsenal</h3>
+            <div className="skills-content">
+              {safeSkills.map((category, idx) => (
+                <div key={idx} className="skill-group">
+                  <h4 className="skill-group-title">{category.category}</h4>
+                  <div className="skill-tags">
+                    {category.items?.map((skill, sIdx) => (
+                      <span key={sIdx} className="skill-tag">{skill.name}</span>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
