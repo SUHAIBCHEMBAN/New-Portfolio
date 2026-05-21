@@ -19,16 +19,33 @@ export default function Resume() {
     if (isLiteMode) return;
 
     const ctx = gsap.context(() => {
-      gsap.from('.resume-accordion-item', {
+      // Header elements reveal
+      gsap.from('.resume-header > *', {
         opacity: 0,
-        y: 20,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power2.out',
+        x: -40,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: '.resume-accordion',
+          trigger: '.resume-header',
           start: 'top 85%',
         }
+      });
+
+      // Accordion items dramatic entrance
+      const items = gsap.utils.toArray('.resume-accordion-item');
+      items.forEach((item) => {
+        gsap.from(item, {
+          opacity: 0,
+          y: 60,
+          scale: 0.98,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 90%',
+          }
+        });
       });
     }, sectionRef);
 

@@ -7,14 +7,14 @@
   pointer-events: none;
   z-index: -1;
   overflow: hidden;
-  background-color: var(--bg-primary);
+  background-color: #050505;
 }
 
 .decor-shape {
   position: absolute;
   border-radius: 50%;
   filter: blur(120px);
-  opacity: 0.1;
+  opacity: 0.14;
   will-change: transform;
 }
 
@@ -29,7 +29,7 @@
 .shape-2 {
   width: 500px;
   height: 500px;
-  background: #7ee8fa;
+  background: #7f140f;
   bottom: -100px;
   left: -100px;
   opacity: 0.05;

@@ -16,7 +16,7 @@ export default function AboutImage() {
 
     const ctx = gsap.context(() => {
       // Premium clip-path reveal
-      gsap.fromTo(".about-image-inner img", 
+      gsap.fromTo(".about-profile-photo", 
         { 
           clipPath: "inset(100% 0% 0% 0%)",
           scale: 1.2
@@ -29,6 +29,21 @@ export default function AboutImage() {
           scrollTrigger: {
             trigger: frameRef.current,
             start: "top 85%"
+          }
+        }
+      );
+
+      // Parallax effect on scroll
+      gsap.fromTo(".about-profile-photo",
+        { yPercent: -10 },
+        {
+          yPercent: 10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: frameRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
           }
         }
       );

@@ -20,12 +20,12 @@ export default function Hero3D() {
       {/* Lighting */}
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1} />
-      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#00d4ff" />
+      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#7f140f" />
       
       {/* Main 3D Object */}
       <Sphere ref={meshRef} args={[1, 100, 100]} scale={2.5}>
         <MeshDistortMaterial
-          color="#6366f1"
+          color="#ffffff"
           attach="material"
           distort={0.5}
           speed={2}
@@ -36,11 +36,11 @@ export default function Hero3D() {
       
       {/* Additional floating spheres */}
       <Sphere position={[3, 1, -2]} args={[0.3, 32, 32]}>
-        <meshStandardMaterial color="#00d4ff" emissive="#00d4ff" emissiveIntensity={0.5} />
+        <meshStandardMaterial color="#7f140f" emissive="#7f140f" emissiveIntensity={0.5} />
       </Sphere>
       
       <Sphere position={[-3, -1, -1]} args={[0.4, 32, 32]}>
-        <meshStandardMaterial color="#6366f1" emissive="#6366f1" emissiveIntensity={0.5} />
+        <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.28} />
       </Sphere>
     </>
   );

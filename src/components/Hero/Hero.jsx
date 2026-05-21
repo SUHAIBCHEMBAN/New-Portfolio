@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { personalInfo } from '../../data/personal';
 import Magnetic from '../shared/Magnetic';
 import './Hero.css';
 
@@ -12,90 +11,103 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.1 });
+      const tl = gsap.timeline({ delay: 0.2 });
 
-      tl.from('.hero-top-bar > *', { opacity: 0, y: -8, duration: 0.6, stagger: 0.1, ease: 'power2.out' })
-        .from('.hero-name .name-char', {
-          yPercent: 110,
-          rotationZ: 3,
-          duration: 1.1,
-          stagger: 0.03,
-          ease: 'expo.out'
-        }, '-=0.3')
-        .from('.hero-divider', { scaleX: 0, duration: 0.8, ease: 'power3.out', transformOrigin: 'left' }, '-=0.5')
-        .from('.hero-info-bar > *', { opacity: 0, y: 10, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, '-=0.4');
+      tl.from('.hero-badge-modern', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' })
+        .from('.hero-title-modern .animate-up', {
+          y: 100,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.1,
+          ease: 'power4.out',
+          clipPath: 'inset(100% 0% 0% 0%)'
+        }, '-=0.6')
+        .from('.hero-desc-modern', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+        .from('.hero-cta-modern', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+        .from('.hero-img-arched', {
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, '-=1');
 
-      gsap.to('.scroll-line', {
-        scaleY: 1.4, y: 18, opacity: 0,
-        repeat: -1, duration: 1.6, ease: 'power1.inOut'
+      gsap.to('.hero-img-arched img', {
+        y: -50,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
       });
+      
+      gsap.to('.hero-name-massive', {
+        x: -150,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
 
-  const nameParts = personalInfo.name.toUpperCase().split(' ');
-
   return (
     <section ref={heroRef} className="hero" id="home">
-
-      {/* Top Bar */}
-      <div className="hero-top-bar">
-        <div className="hero-badge">
-          <span className="hero-badge-dot"></span>
-          Available for Work
-        </div>
-        <div className="hero-top-meta">
-          <span>Full Stack Developer</span>
-          <span className="hero-top-divider">—</span>
-          <span>Kerala, India</span>
-        </div>
-        <span className="hero-year">© {new Date().getFullYear()}</span>
+      <div className="hero-grid-bg"></div>
+      
+      <div className="hero-name-massive">
+        SUHAIB CHEMBAN
       </div>
 
-      {/* Massive Name */}
-      <div className="hero-name-wrapper">
-        <h1 className="hero-name">
-          {nameParts.map((word, wi) => (
-            <div key={wi} className={`hero-name-row ${wi % 2 === 1 ? 'name-row-right' : ''}`}>
-              {word.split('').map((char, ci) => (
-                <span key={ci} className="name-char" style={{ display: 'inline-block' }}>{char}</span>
-              ))}
+      <div className="hero-content-modern">
+        <div className="hero-left-modern">
+          <div className="hero-badge-modern">
+            <span className="dot"></span>
+            Available for freelance
+          </div>
+          
+          <h1 className="hero-title-modern">
+            <div className="line"><span className="animate-up">Digital</span></div>
+            <div className="line"><span className="animate-up">Experience</span></div>
+            <div className="line word-slider animate-up">
+              <div className="word-slider-inner">
+                <span className="text-accent">Architect.</span>
+                <span className="text-accent">Developer.</span>
+                <span className="text-accent">Designer.</span>
+                <span className="text-accent">Creator.</span>
+                <span className="text-accent">Architect.</span>
+              </div>
             </div>
-          ))}
-        </h1>
-      </div>
+          </h1>
+          
+          <p className="hero-desc-modern">
+            I engineer high-performance, award-winning digital experiences that merge cutting-edge technology with premium cinematic aesthetics.
+          </p>
+          
+          <div className="hero-cta-modern">
+            <Magnetic>
+              <a href="#works" className="btn btn-primary clickable">View Projects ↗</a>
+            </Magnetic>
+            <Magnetic>
+              <a href="#contact" className="btn btn-outline clickable">Start a Project</a>
+            </Magnetic>
+          </div>
+        </div>
 
-      {/* Divider */}
-      <div className="hero-divider">
-        <div className="hero-marquee-track">
-          {['Full Stack Dev', '·', 'UI/UX', '·', 'React', '·', 'Django', '·', 'Web Design', '·', 'Open to Work', '·',
-            'Full Stack Dev', '·', 'UI/UX', '·', 'React', '·', 'Django', '·', 'Web Design', '·', 'Open to Work', '·'].map((item, i) => (
-            <span key={i} className="hero-marquee-item">{item}</span>
-          ))}
+        <div className="hero-right-modern">
+          <div className="hero-img-arched">
+            <img src="/assets/profile.PNG" alt="Suhaib Chemban" />
+            <div className="hero-img-overlay"></div>
+          </div>
         </div>
       </div>
-
-      {/* Info Bar */}
-      <div className="hero-info-bar">
-        <p className="hero-tagline">
-          Designing &amp; engineering high-impact digital experiences for the next generation.
-        </p>
-        <div className="hero-cta">
-          <Magnetic>
-            <a href="#works" className="btn btn-primary clickable">View Work ↗</a>
-          </Magnetic>
-          <Magnetic>
-            <a href="#contact" className="btn btn-outline clickable">Start a Project</a>
-          </Magnetic>
-        </div>
-      </div>
-
-      {/* Scroll */}
-      <div className="scroll-indicator" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
-        <div className="scroll-line"></div>
-      </div>
-
     </section>
   );
 }

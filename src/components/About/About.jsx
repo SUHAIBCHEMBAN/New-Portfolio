@@ -20,14 +20,40 @@ export default function About() {
     if (isLiteMode) return;
 
     const ctx = gsap.context(() => {
-      gsap.from('.about-block', {
+      // Top content reveal
+      gsap.from('.about-lead', {
         opacity: 0,
         y: 40,
-        duration: 0.8,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.about-top-content',
+          start: 'top 85%',
+        }
+      });
+
+      // Description text reveal
+      gsap.from('.about-description p', {
+        opacity: 0,
+        y: 30,
+        duration: 1,
         stagger: 0.2,
         ease: 'power3.out',
         scrollTrigger: {
-          trigger: '.about-grid',
+          trigger: '.about-text-col',
+          start: 'top 80%',
+        }
+      });
+
+      // Skills grid stagger
+      gsap.from('.skill-category', {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.skills-grid',
           start: 'top 85%',
         }
       });
@@ -38,49 +64,47 @@ export default function About() {
 
   return (
     <section ref={sectionRef} className="about-section" id="about">
-      <div className="container">
-        <header className="about-header">
-          <AnimatedTitle text="About" mode="split" />
-        </header>
-
-        <div className="about-grid">
-          {/* Block 1: Bio */}
-          <div className="about-block bio-block">
-            <h3 className="block-title">01 — Background</h3>
-            <div className="bio-content">
-              <p className="lead-paragraph">
-                I am a Full-Stack Developer specializing in high-performance web applications and premium digital experiences.
-              </p>
-              <p>
-                Based in Kerala, India, my foundation is built on Python and JavaScript ecosystems. From engineering robust backend systems with Django to crafting fluid, responsive interfaces in React, I bridge the gap between complex logic and beautiful design.
-              </p>
-              <p>
-                My approach is deeply analytical yet highly creative—treating code not just as instructions, but as the architecture of a brand's digital presence.
-              </p>
-            </div>
+      <div className="about-container">
+        <div className="about-top-content">
+          <div className="about-header-modern">
+            <AnimatedTitle text="Behind the code" mode="split" />
           </div>
+          <div className="about-lead about-fade-up">
+            <p>I am a <span className="text-accent">Full-Stack Developer</span> specializing in high-performance web applications and premium digital experiences.</p>
+          </div>
+        </div>
 
-          {/* Block 2: Visual */}
-          <div className="about-block image-block">
-            <div className="about-image-wrapper">
+        <div className="about-main-layout">
+          <div className="about-image-col about-fade-up">
+            <div className="about-image-modern">
               <AboutImage />
+              <div className="about-badge">EST. 2023</div>
             </div>
           </div>
 
-          {/* Block 3: Arsenal */}
-          <div className="about-block skills-block">
-            <h3 className="block-title">02 — Arsenal</h3>
-            <div className="skills-content">
-              {safeSkills.map((category, idx) => (
-                <div key={idx} className="skill-group">
-                  <h4 className="skill-group-title">{category.category}</h4>
-                  <div className="skill-tags">
-                    {category.items?.map((skill, sIdx) => (
-                      <span key={sIdx} className="skill-tag">{skill.name}</span>
-                    ))}
+          <div className="about-text-col">
+            <div className="about-description about-fade-up">
+              <p>Based in Kerala, India, my foundation is built on Python and JavaScript ecosystems. From engineering robust backend systems with Django to crafting fluid, responsive interfaces in React, I bridge the gap between complex logic and beautiful design.</p>
+              <p>My approach is deeply analytical yet highly creative—treating code not just as instructions, but as the architecture of a brand's digital presence.</p>
+            </div>
+            
+            <div className="about-skills-modern about-fade-up">
+              <h3 className="skills-title">Technical Arsenal</h3>
+              <div className="skills-grid">
+                {safeSkills.map((category, idx) => (
+                  <div key={idx} className="skill-category">
+                    <div className="skill-cat-header">
+                      <span className="skill-cat-num">0{idx + 1}</span>
+                      <h4>{category.category}</h4>
+                    </div>
+                    <div className="skill-list">
+                      {category.items?.map((skill, sIdx) => (
+                        <span key={sIdx}>{skill.name}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

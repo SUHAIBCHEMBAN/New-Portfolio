@@ -21,15 +21,42 @@ export default function Contact() {
     if (isLiteMode) return;
 
     const ctx = gsap.context(() => {
+      // Info block and form block stagger
       gsap.from('.contact-info-block, .contact-form-block', {
         opacity: 0,
-        y: 40,
-        duration: 0.8,
+        y: 60,
+        duration: 1,
         stagger: 0.2,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.contact-grid',
-          start: 'top 80%',
+          start: 'top 85%',
+        }
+      });
+
+      // Individual methods stagger
+      gsap.from('.contact-method', {
+        opacity: 0,
+        x: -20,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.contact-methods',
+          start: 'top 90%',
+        }
+      });
+
+      // Form groups stagger
+      gsap.from('.form-group, .submit-btn', {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.contact-form',
+          start: 'top 90%',
         }
       });
     }, sectionRef);

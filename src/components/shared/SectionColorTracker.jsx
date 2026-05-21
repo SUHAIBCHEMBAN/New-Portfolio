@@ -6,11 +6,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SectionColorTracker() {
   useEffect(() => {
-    // Definining color themes for each section
+    // Black, red, and white color rhythm for each section.
     const sections = [
-      { id: 'home', bg: '#000000' },
-      { id: 'about', bg: '#050505' },
-      { id: 'works', bg: '#0a0a0a' },
+      { id: 'home', bg: '#050505' },
+      { id: 'about', bg: '#0c0809' },
+      { id: 'works', bg: '#050505' },
+      { id: 'resume', bg: '#090607' },
       { id: 'contact', bg: '#000000' }
     ];
 

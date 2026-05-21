@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from './components/shared/Navigation';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
@@ -33,18 +35,19 @@ function App() {
       smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
-    })
+    });
 
-    let frameId = 0;
-    function raf(time) {
-      lenis.raf(time);
-      frameId = requestAnimationFrame(raf);
-    }
+    lenis.on('scroll', ScrollTrigger.update);
 
-    frameId = requestAnimationFrame(raf);
+    const updateLenis = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(updateLenis);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(frameId);
+      gsap.ticker.remove(updateLenis);
       lenis.destroy();
     };
   }, [isLiteMode]);
