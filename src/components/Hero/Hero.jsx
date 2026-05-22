@@ -103,7 +103,7 @@ export default function Hero() {
 
         <div className="hero-right-modern">
           <div className="hero-img-arched">
-            <img src="/assets/profile.PNG" alt="Suhaib Chemban" />
+            <img src="/assets/profile.webp" alt="Suhaib Chemban" />
             <div className="hero-img-overlay"></div>
           </div>
         </div>
