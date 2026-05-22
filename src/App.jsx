@@ -1,19 +1,20 @@
-import { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from './components/shared/Navigation';
 import Hero from './components/Hero/Hero';
-import About from './components/About/About';
-import Works from './components/Works/Works';
-import Resume from './components/Resume/Resume';
-import Contact from './components/Contact/Contact';
 import Footer from './components/shared/Footer';
-import BackgroundCanvas from './components/Canvas3D/BackgroundCanvas';
 import CustomCursor from './components/shared/CustomCursor';
 import BackgroundDecor from './components/shared/BackgroundDecor';
 import SectionColorTracker from './components/shared/SectionColorTracker';
 import './App.css';
+
+const About = React.lazy(() => import('./components/About/About'));
+const Works = React.lazy(() => import('./components/Works/Works'));
+const Resume = React.lazy(() => import('./components/Resume/Resume'));
+const Contact = React.lazy(() => import('./components/Contact/Contact'));
+const BackgroundCanvas = React.lazy(() => import('./components/Canvas3D/BackgroundCanvas'));
 
 function App() {
   const isLiteMode =
@@ -56,14 +57,18 @@ function App() {
       {!isLiteMode && <CustomCursor />}
       {!isLiteMode && <BackgroundDecor />}
       {!isLiteMode && <SectionColorTracker />}
-      <BackgroundCanvas />
+      <Suspense fallback={null}>
+        <BackgroundCanvas />
+      </Suspense>
       <Navigation />
       <main style={{ position: 'relative', zIndex: 1, backgroundColor: 'transparent' }}>
         <Hero />
-        <About />
-        <Works />
-        <Resume />
-        <Contact />
+        <Suspense fallback={null}>
+          <About />
+          <Works />
+          <Resume />
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
     </div>

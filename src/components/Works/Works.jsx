@@ -84,7 +84,7 @@ export default function Works() {
             <article key={project.id} className="work-item-modern clickable">
               <a href={project.liveUrl || '#works'} target={project.liveUrl ? '_blank' : undefined} rel={project.liveUrl ? 'noopener noreferrer' : undefined}>
                 <div className="work-item-image">
-                  <img src={project.image} alt={project.title} />
+                  <img src={project.image} alt={project.title} loading="lazy" />
                   <div className="work-item-overlay">
                     <span className="view-text">View Project ↗</span>
                   </div>

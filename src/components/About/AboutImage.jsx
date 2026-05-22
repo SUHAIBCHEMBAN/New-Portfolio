@@ -87,9 +87,10 @@ export default function AboutImage() {
       ref={frameRef}
     >
       <img 
-        src="/assets/profile.PNG" 
-        alt="Suhaib - Full Stack Developer" 
+        src="/assets/about-illustration.webp" 
+        alt="Suhaib - Developer Workspace" 
         className="about-profile-photo" 
+        loading="lazy"
       />
     </div>
   );
