@@ -154,7 +154,7 @@ export const projects = [
         image: "/images/adopicads.webp",
         technologies: ["Static", "Marketing", "Informational"],
         category: "Static",
-        liveUrl: "https://www.adopic.ads",
+        liveUrl: "https://www.adopicads.com",
         githubUrl: null,
         featured: true
     }
